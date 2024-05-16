@@ -12,5 +12,5 @@ workspace = true
 daocutil = { path = "../daocutil" }
 anyhow = "1.0.81"
 thiserror = "1.0.58"
-itertools = "0.12.1"
+itertools = "0.13.0"
 nu-ansi-term = "0.50.0"
