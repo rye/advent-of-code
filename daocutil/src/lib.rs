@@ -23,9 +23,16 @@ fn parse_just_numbers(str: &str) -> Result<u8, ParseIntError> {
 	str.matches(char::is_numeric).collect::<String>().parse()
 }
 
+/// Attempts to parse a given string into a `u8` representing the number of the day.
+///
+/// This function will first try to parse the string directly as a `u8`.
+/// If parsing the string directly as a `u8` fails, then another attempt is made to parse the string by only parsing the numeric characters from it.
+///
+/// In either case, if the parsing succeeds, the resulting `u8` is returned.
+/// If both attempts fail, `None` is returned.
 pub fn parse_day_identifier(str: &str) -> Option<u8> {
 	match (str.parse(), parse_just_numbers(str)) {
-		(Ok(u32), _) | (Err(_), Ok(u32)) => Some(u32),
+		(Ok(u8), _) | (Err(_), Ok(u8)) => Some(u8),
 		(_, _) => None,
 	}
 }
@@ -41,10 +48,11 @@ mod parse_day_identifier {
 	}
 }
 
+/// Generate the solver for a given day.
 #[macro_export]
 macro_rules! generate_solver {
 	($fn_name:ident, =>, $place:path ) => {
-		fn $fn_name(data: &str) -> Result<(), Box<dyn std::error::Error>> {
+		pub(crate) fn $fn_name(data: &str) -> Result<(), Box<dyn std::error::Error>> {
 			use $place::{parse, part_one, part_two, Intermediate};
 
 			let intermediate: Intermediate = parse(data)?;

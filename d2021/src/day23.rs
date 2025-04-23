@@ -222,10 +222,12 @@ fn parse_example_1() {
 
 type Solution = i32;
 
-#[must_use] pub fn part_one(_intermediate: &Intermediate) -> Option<Solution> {
+#[must_use]
+pub fn part_one(_intermediate: &Intermediate) -> Option<Solution> {
 	None
 }
 
-#[must_use] pub fn part_two(_intermediate: &Intermediate) -> Option<Solution> {
+#[must_use]
+pub fn part_two(_intermediate: &Intermediate) -> Option<Solution> {
 	None
 }

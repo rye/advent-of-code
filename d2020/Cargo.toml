@@ -10,13 +10,12 @@ rust-version = "1.74"
 workspace = true
 
 [dependencies]
-itertools = "0.13.0"
-num = "0.4.1"
-num-integer = "0.1.46"
-regex = "1.10.4"
-thiserror = "2.0.3"
-
-daocutil = { path = "../daocutil" }
+itertools.workspace = true
+num.workspace = true
+num-integer.workspace = true
+regex.workspace = true
+thiserror.workspace = true
+daocutil.workspace = true
 
 [dev-dependencies]
 static_assertions = "1.1.0"

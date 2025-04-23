@@ -17,7 +17,7 @@ impl FromStr for Game {
 
 		let number = game_n
 			.split(' ')
-			.last()
+			.next_back()
 			.expect("expected \" \" in game_n part")
 			.parse()
 			.expect("expected game number");

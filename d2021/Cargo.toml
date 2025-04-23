@@ -9,10 +9,11 @@ rust-version = "1.74"
 workspace = true
 
 [dependencies]
-itertools = "0.13.0"
-md5 = "0.7.0"
-rayon = "1.10.0"
-regex = "1.10.4"
-thiserror = "2.0.3"
-
-daocutil = { path = "../daocutil" }
+anyhow.workspace = true
+daocutil.workspace = true
+itertools.workspace = true
+md5.workspace = true
+nu-ansi-term.workspace = true
+rayon.workspace = true
+regex.workspace = true
+thiserror.workspace = true

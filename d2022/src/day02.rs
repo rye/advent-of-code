@@ -47,7 +47,7 @@ impl Outcome {
 	}
 }
 
-impl<'p> StrategyPart<'p> {
+impl StrategyPart<'_> {
 	fn score_as_move_move(&self) -> u32 {
 		use {
 			Move::{Paper, Rock, Scissors},

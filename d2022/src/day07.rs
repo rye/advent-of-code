@@ -105,7 +105,7 @@ pub fn parse(input: &str) -> anyhow::Result<Intermediate> {
 				}
 				None => todo!(),
 			},
-		};
+		}
 	}
 
 	Ok(DirectoryTree(tree))

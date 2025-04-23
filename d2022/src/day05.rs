@@ -163,7 +163,7 @@ pub fn parse(input: &str) -> anyhow::Result<Intermediate> {
 						stacks.entry(stack).or_default().push(krate);
 					}
 					_ => unreachable!(),
-				};
+				}
 			}
 		}
 

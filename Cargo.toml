@@ -1,18 +1,6 @@
 [workspace]
 resolver = "2"
-members = [
-	"daocutil",
-	"d2015",
-	"d2016",
-	"d2017",
-	"d2018",
-	"d2019",
-	"d2020",
-	"d2021",
-	"d2022",
-	"d2023",
-	"d2024",
-]
+members = ["daocutil", "daoc", "d2020", "d2021", "d2022", "d2023"]
 
 [workspace.lints.clippy]
 all = { level = "deny", priority = -1 }
@@ -21,3 +9,16 @@ cognitive_complexity = "warn"
 missing_panics_doc = "allow"
 must_use_candidate = "allow"
 missing_errors_doc = "allow"
+
+[workspace.dependencies]
+anyhow = "1.0.93"
+daocutil = { path = "./daocutil" }
+itertools = "0.13.0"
+nu-ansi-term = "0.50.1"
+regex = "1.11.1"
+thiserror = "2.0.3"
+md5 = "0.7.0"
+rayon = "1.10.0"
+num = "0.4.1"
+num-integer = "0.1.46"
+phf = { version = "0.11.2", features = ["macros"] }

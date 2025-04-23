@@ -78,7 +78,8 @@ fn simulate(school: &mut School, cycles: usize) {
 	}
 }
 
-#[must_use] pub fn part_one(school: &Intermediate) -> Option<Solution> {
+#[must_use]
+pub fn part_one(school: &Intermediate) -> Option<Solution> {
 	let mut school: School = *school;
 
 	simulate(&mut school, 80);
@@ -86,7 +87,8 @@ fn simulate(school: &mut School, cycles: usize) {
 	Some(school_size(&school))
 }
 
-#[must_use] pub fn part_two(school: &Intermediate) -> Option<Solution> {
+#[must_use]
+pub fn part_two(school: &Intermediate) -> Option<Solution> {
 	let mut school: School = *school;
 
 	simulate(&mut school, 256);

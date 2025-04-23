@@ -21,7 +21,5 @@ daocutil::generate_main!(daocutil::generate_solvers![
 	20_u8 day20 | => d2020::day20,
 	21_u8 day21 | => d2020::day21,
 	22_u8 day22 | => d2020::day22,
-	23_u8 day23 | => d2020::day23,
-	24_u8 day24 | => d2020::day24,
 	25_u8 day25 | => d2020::day25,
 ]);

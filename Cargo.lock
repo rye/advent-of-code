@@ -49,64 +49,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "22ec99545bb0ed0ea7bb9b8e1e9122ea386ff8a48c0922e43f36d45ab09e0e80"
 
 [[package]]
-name = "d2015"
-version = "0.1.0"
-dependencies = [
- "itertools",
- "md5",
- "regex",
- "thiserror",
-]
-
-[[package]]
-name = "d2016"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "daocutil",
- "itertools",
- "nu-ansi-term",
- "phf",
- "regex",
- "thiserror",
-]
-
-[[package]]
-name = "d2017"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "daocutil",
- "itertools",
- "nu-ansi-term",
- "thiserror",
-]
-
-[[package]]
-name = "d2018"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "daocutil",
- "itertools",
- "nu-ansi-term",
- "regex",
- "thiserror",
-]
-
-[[package]]
-name = "d2019"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "daocutil",
- "itertools",
- "nu-ansi-term",
- "regex",
- "thiserror",
-]
-
-[[package]]
 name = "d2020"
 version = "0.1.0"
 dependencies = [
@@ -123,9 +65,11 @@ dependencies = [
 name = "d2021"
 version = "0.1.0"
 dependencies = [
+ "anyhow",
  "daocutil",
  "itertools",
  "md5",
+ "nu-ansi-term",
  "rayon",
  "regex",
  "thiserror",
@@ -156,13 +100,16 @@ dependencies = [
 ]
 
 [[package]]
-name = "d2024"
+name = "daoc"
 version = "0.1.0"
 dependencies = [
  "anyhow",
  "daocutil",
  "itertools",
+ "md5",
  "nu-ansi-term",
+ "phf",
+ "rayon",
  "regex",
  "thiserror",
 ]

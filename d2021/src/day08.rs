@@ -20,7 +20,8 @@ pub fn parse(input: &str) -> Result<Intermediate, core::convert::Infallible> {
 
 type Solution = usize;
 
-#[must_use] pub fn part_one(parts: &Intermediate) -> Option<Solution> {
+#[must_use]
+pub fn part_one(parts: &Intermediate) -> Option<Solution> {
 	Some(
 		parts
 			.iter()
@@ -62,8 +63,8 @@ fn solve_segments(signals: &[&str; 10]) -> [HashSet<char>; 10] {
 	// top and bottom right segments, so both are recorded as possibilities for now.
 	let one_signal = signals.iter().find(|&s| s.len() == 2).unwrap();
 
-	possibilities[SEGMENT_TOP_RIGHT] = one_signal.clone();
-	possibilities[SEGMENT_BOTTOM_RIGHT] = one_signal.clone();
+	possibilities[SEGMENT_TOP_RIGHT].clone_from(one_signal);
+	possibilities[SEGMENT_BOTTOM_RIGHT].clone_from(one_signal);
 
 	// Four is the only signal mapping with only four parts.
 	let four_signal = signals.iter().find(|&s| s.len() == 4).unwrap();
@@ -237,7 +238,8 @@ fn apply_segments(solved_digits: &[HashSet<char>; 10], outputs: &[&str; 4]) -> u
 	digits[0] * 1000 + digits[1] * 100 + digits[2] * 10 + digits[3]
 }
 
-#[must_use] pub fn part_two(parts: &Intermediate) -> Option<Solution> {
+#[must_use]
+pub fn part_two(parts: &Intermediate) -> Option<Solution> {
 	Some(
 		parts
 			.iter()

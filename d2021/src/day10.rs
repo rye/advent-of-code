@@ -119,7 +119,8 @@ pub fn parse(input: &str) -> Result<Intermediate, core::convert::Infallible> {
 
 type Solution = u64;
 
-#[must_use] pub fn part_one(subsystem: &Intermediate) -> Option<Solution> {
+#[must_use]
+pub fn part_one(subsystem: &Intermediate) -> Option<Solution> {
 	Some(subsystem.iter().fold(0_u64, |acc, line| {
 		acc
 			+ match line {
@@ -155,7 +156,8 @@ fn stack_completion() {
 	);
 }
 
-#[must_use] pub fn part_two(subsystem: &Intermediate) -> Option<Solution> {
+#[must_use]
+pub fn part_two(subsystem: &Intermediate) -> Option<Solution> {
 	use std::collections::BTreeSet;
 
 	let valid_line_scores: BTreeSet<u64> = subsystem

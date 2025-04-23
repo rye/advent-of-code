@@ -173,7 +173,8 @@ pub fn part_two(passports: &Intermediate) -> Option<Solution> {
 						birth_year_ok
 							&& issue_year_ok
 							&& expiry_year_ok
-							&& height_ok && hair_color_ok
+							&& height_ok
+							&& hair_color_ok
 							&& eye_color_ok
 							&& pid_ok
 					}

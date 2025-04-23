@@ -7,54 +7,54 @@ pub fn parse(data: &str) -> Result<Intermediate, ProgramParseError> {
 	data.parse()
 }
 
-pub fn part_one(program: &Program) -> Option<Solution> {
-	impl Program {
-		fn execute_part_one(&self) -> State {
-			let mut state = State::new();
+impl Program {
+	fn execute_part_one(&self) -> State {
+		let mut state = State::new();
 
-			for instr in &self.0 {
-				match instr {
-					SetMask(mask) => {
-						state.mask = Some(mask.clone());
-					}
-					Write { address, value } => {
-						let value = state.mask.clone().unwrap().apply(*value);
-						state.memory.insert(*address, value);
-					}
+		for instr in &self.0 {
+			match instr {
+				SetMask(mask) => {
+					state.mask = Some(mask.clone());
+				}
+				Write { address, value } => {
+					let value = state.mask.clone().unwrap().apply(*value);
+					state.memory.insert(*address, value);
 				}
 			}
-
-			state
 		}
-	}
 
+		state
+	}
+}
+
+pub fn part_one(program: &Program) -> Option<Solution> {
 	Some(program.execute_part_one().memory.into_values().sum())
 }
 
-pub fn part_two(program: &Program) -> Option<Solution> {
-	impl Program {
-		fn execute_part_two(&self) -> State {
-			let mut state = State::new();
+impl Program {
+	fn execute_part_two(&self) -> State {
+		let mut state = State::new();
 
-			for instr in &self.0 {
-				match instr {
-					SetMask(mask) => {
-						state.mask = Some(mask.clone());
-					}
-					Write { address, value } => {
-						let addresses = state.mask.clone().unwrap().decode_memory_address(*address);
+		for instr in &self.0 {
+			match instr {
+				SetMask(mask) => {
+					state.mask = Some(mask.clone());
+				}
+				Write { address, value } => {
+					let addresses = state.mask.clone().unwrap().decode_memory_address(*address);
 
-						for address in addresses {
-							state.memory.insert(address, *value);
-						}
+					for address in addresses {
+						state.memory.insert(address, *value);
 					}
 				}
 			}
-
-			state
 		}
-	}
 
+		state
+	}
+}
+
+pub fn part_two(program: &Program) -> Option<Solution> {
 	Some(program.execute_part_two().memory.into_values().sum())
 }
 
