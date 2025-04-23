@@ -1,4 +1,4 @@
-use super::{part_one_prec_props_fn, part_two_prec_props_fn, Expr, OpTokenProps, Token, Token::*};
+use super::{Expr, OpTokenProps, Token, Token::*, part_one_prec_props_fn, part_two_prec_props_fn};
 
 #[cfg(test)]
 mod expr {
@@ -70,7 +70,7 @@ mod expr {
 
 		#[cfg(test)]
 		mod part_one_prec_props_fn {
-			use super::{part_one_prec_props_fn, Expr, Token::*};
+			use super::{Expr, Token::*, part_one_prec_props_fn};
 
 			#[test]
 			fn e71() {
@@ -243,7 +243,7 @@ mod expr {
 
 		#[cfg(test)]
 		mod part_two_prec_props_fn {
-			use super::{part_two_prec_props_fn, Expr, Token::*};
+			use super::{Expr, Token::*, part_two_prec_props_fn};
 
 			#[test]
 			fn e231() {

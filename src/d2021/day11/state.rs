@@ -100,14 +100,14 @@ impl<const N: usize> State<N> {
 
 			{
 				// First, bump the value.
-				self.octopi[y_idx][x_idx].0 .0 += 1;
+				self.octopi[y_idx][x_idx].0.0 += 1;
 
 				// If that caused the octopus to have an energy level greater than 9, it flashes.
-				if self.octopi[y_idx][x_idx].0 .0 > 9 {
+				if self.octopi[y_idx][x_idx].0.0 > 9 {
 					// Mark this cell as flashed and reset its value to 0.
 					flashes_seen += 1;
 					flashed_cells[y_idx][x_idx] = true;
-					self.octopi[y_idx][x_idx].0 .0 = 0;
+					self.octopi[y_idx][x_idx].0.0 = 0;
 
 					// And also causes its (unflashed) neighbors to increase in level.
 					for (y, x) in neighbors::<N>(y, x) {

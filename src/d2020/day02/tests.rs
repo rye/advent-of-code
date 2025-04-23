@@ -1,4 +1,4 @@
-use super::{validate_password, Rule};
+use super::{Rule, validate_password};
 
 #[test]
 fn validate_password_correct_0() {
