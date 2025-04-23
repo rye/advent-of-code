@@ -178,7 +178,7 @@ impl Intcode {
 		// If the user has supplied us with an input in the queue, use it.
 		// Otherwise, prompt for an input.
 		if self.interactive {
-			use std::io::{stdin, stdout, Write};
+			use std::io::{Write, stdin, stdout};
 
 			let mut input: String = String::new();
 			print!("<= ");

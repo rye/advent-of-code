@@ -3,7 +3,7 @@ pub fn binary_hone(instructions: &str, left: char, right: char) -> usize {
 		0..2_usize.pow(u32::try_from(instructions.len()).unwrap());
 
 	for instruction in instructions.chars() {
-		let midpoint = (range.start + range.end) / 2;
+		let midpoint = usize::midpoint(range.start, range.end);
 
 		match instruction {
 			c if c == left => range = range.start..midpoint,

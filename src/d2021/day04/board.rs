@@ -106,7 +106,7 @@ impl core::str::FromStr for Board {
 
 #[cfg(test)]
 mod parse_board_line {
-	use super::{parse_board_line, Error};
+	use super::{Error, parse_board_line};
 
 	#[test]
 	fn line_62_5_77_94_75() {
