@@ -1,7 +1,7 @@
 use core::error::Error;
 use std::env::Args;
 
-use daoc::SolverClass;
+use aoc::SolverClass;
 
 pub type Solver = fn(&str) -> Result<(), Box<dyn Error>>;
 
@@ -12,7 +12,7 @@ fn main() -> Result<(), Box<dyn Error>> {
 	// Build the plan from the SOLVER_GLOBAL_MAP.
 	// This involves crawling the SOLVER_GLOBAL_MAP and finding all solvers that match the year and day constriants.
 
-	let solvers_to_run: std::collections::BTreeSet<(u16, u8, &SolverClass)> = daoc::SOLVER_GLOBAL_MAP
+	let solvers_to_run: std::collections::BTreeSet<(u16, u8, &SolverClass)> = aoc::SOLVER_GLOBAL_MAP
 		.entries()
 		.flat_map(|(year, days)| days.entries().map(|(day, solver)| (*year, *day, solver)))
 		.filter(|(year, day, _)| {

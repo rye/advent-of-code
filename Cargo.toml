@@ -1,16 +1,10 @@
-[workspace]
-resolver = "2"
-members = ["daoc"]
+[package]
+name = "aoc"
+publish = false
+version = "0.1.0"
+edition = "2024"
 
-[workspace.lints.clippy]
-all = { level = "deny", priority = -1 }
-pedantic = { level = "warn", priority = -1 }
-cognitive_complexity = "warn"
-missing_panics_doc = "allow"
-must_use_candidate = "allow"
-missing_errors_doc = "allow"
-
-[workspace.dependencies]
+[dependencies]
 anyhow = "1.0.93"
 itertools = "0.13.0"
 nu-ansi-term = "0.50.1"
@@ -21,3 +15,11 @@ rayon = "1.10.0"
 num = "0.4.1"
 num-integer = "0.1.46"
 phf = { version = "0.11.2", features = ["macros"] }
+
+[lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+cognitive_complexity = "warn"
+missing_panics_doc = "allow"
+must_use_candidate = "allow"
+missing_errors_doc = "allow"
