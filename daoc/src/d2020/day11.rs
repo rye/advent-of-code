@@ -274,4 +274,4 @@ fn layout_parse() {
 	);
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

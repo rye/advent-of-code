@@ -74,7 +74,7 @@ pub fn part_two(chars: &Intermediate) -> Option<Output> {
 
 #[test]
 fn part_two_examples() {
-	daocutil::test_examples!(
+	crate::test_examples!(
 		parse,
 		part_two,
 		"mjqjpqmgbljsphdztnvjfqwrcgsmlb" => Some(19),
@@ -85,7 +85,7 @@ fn part_two_examples() {
 	);
 }
 
-daocutil::generate_example_tests!(parse, part_two,
+crate::generate_example_tests!(parse, part_two,
 	part_two_example_0 | "mjqjpqmgbljsphdztnvjfqwrcgsmlb" => Some(19),
 	part_two_example_1 | "bvwbjplbgvbhsrlpgdmjqwftvncz" => Some(23),
 	part_two_example_2 | "nppdvjthqldpwncqszvftbrmjlhg" => Some(23),
@@ -93,4 +93,4 @@ daocutil::generate_example_tests!(parse, part_two,
 	part_two_example_4 | "zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw" => Some(26),
 );
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

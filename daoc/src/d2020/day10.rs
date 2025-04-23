@@ -127,4 +127,4 @@ fn jolt_differences(adapters: Vec<u64>) -> Vec<u64> {
 #[cfg(test)]
 mod tests {}
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

@@ -137,4 +137,4 @@ pub fn part_two((template, rules): &Intermediate) -> Option<Output> {
 	Some(qty_max - qty_min)
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

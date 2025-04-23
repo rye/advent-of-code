@@ -19,6 +19,8 @@ mod d2024;
 
 mod dtemplate;
 
+mod util;
+
 // Years -> Days -> Solvers
 
 /// Types of solvers

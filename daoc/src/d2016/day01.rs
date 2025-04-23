@@ -56,7 +56,7 @@ pub fn part_two(moves: &Intermediate) -> Option<Output> {
 	None
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);
 
 use std::collections::BTreeMap;
 
@@ -93,11 +93,11 @@ impl core::str::FromStr for Move {
 	}
 }
 
-daocutil::test_example!(part_one_r2_l3, parse, part_one, "R2, L3", Some(5));
+crate::test_example!(part_one_r2_l3, parse, part_one, "R2, L3", Some(5));
 
-daocutil::test_example!(part_one_r2_r2_r2, parse, part_one, "R2, R2, R2", Some(2));
+crate::test_example!(part_one_r2_r2_r2, parse, part_one, "R2, R2, R2", Some(2));
 
-daocutil::test_example!(
+crate::test_example!(
 	part_one_r5_l5_r5_r3,
 	parse,
 	part_one,
@@ -110,7 +110,7 @@ fn taxicab_distance((x0, y0): (i32, i32), (x1, y1): (i32, i32)) -> u32 {
 	((x1 - x0).abs() + (y1 - y0).abs()) as u32
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_two_r8_r4_r4_r8,
 	parse,
 	part_two,

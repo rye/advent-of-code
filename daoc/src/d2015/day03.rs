@@ -133,4 +133,4 @@ pub fn part_two(directions: &Intermediate) -> Option<Output> {
 	Some(map.keys().len())
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

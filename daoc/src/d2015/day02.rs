@@ -71,7 +71,7 @@ pub fn part_two(gifts: &Intermediate) -> Option<Output> {
 	Some(gifts.iter().map(Gift::ribbon_required).sum())
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);
 
 impl core::str::FromStr for Gift {
 	type Err = ParseIntError;

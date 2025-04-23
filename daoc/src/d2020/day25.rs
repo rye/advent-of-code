@@ -145,4 +145,4 @@ fn find_encryption_key_d17807724_c5764801() {
 	);
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

@@ -327,7 +327,7 @@ pub fn part_one(pairs: &Intermediate) -> Option<Output> {
 	Some(sum)
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_one_example,
 	parse,
 	part_one,
@@ -364,7 +364,7 @@ pub fn part_two(pairs: &Intermediate) -> Option<Output> {
 	Some(result)
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_two_example,
 	parse,
 	part_two,
@@ -372,4 +372,4 @@ daocutil::test_example!(
 	Some(140)
 );
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

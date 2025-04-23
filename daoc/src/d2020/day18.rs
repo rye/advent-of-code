@@ -236,4 +236,4 @@ pub fn part_two(exprs: &Intermediate) -> Option<Output> {
 		.sum()
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

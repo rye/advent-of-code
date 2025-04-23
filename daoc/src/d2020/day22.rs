@@ -283,4 +283,4 @@ pub fn part_two(_game: &Game) -> Option<Output> {
 	None
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

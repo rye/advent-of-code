@@ -54,7 +54,7 @@ enum Mode {
 	PartTwo,
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_one_example,
 	parse,
 	part_one,
@@ -77,7 +77,7 @@ fn step(program: &mut [i32], offset: &mut usize, mode: Mode) {
 		.unsigned_abs() as usize;
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_two_example,
 	parse,
 	part_two,
@@ -85,4 +85,4 @@ daocutil::test_example!(
 	Some(10)
 );
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

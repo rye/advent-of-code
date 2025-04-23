@@ -236,4 +236,4 @@ fn part_two_example() {
 	assert_eq!(part_two(&instructions), Some(286.0_f64));
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

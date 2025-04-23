@@ -101,7 +101,7 @@ pub fn part_one(games: &Intermediate) -> Option<Output> {
 	Some(game_ids_not_exceeding_counts_with_replacement(games, 12, 13, 14).sum())
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_one_example,
 	parse,
 	part_one,
@@ -184,7 +184,7 @@ pub fn part_two(games: &Intermediate) -> Option<Output> {
 	prod.try_into().ok()
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_two_example,
 	parse,
 	part_two,
@@ -192,4 +192,4 @@ daocutil::test_example!(
 	Some(2286)
 );
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

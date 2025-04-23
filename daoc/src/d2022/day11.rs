@@ -6,7 +6,7 @@ use std::{
 
 use regex::Regex;
 
-use daocutil::SolverMode;
+use crate::util::SolverMode;
 
 pub type Intermediate = BTreeMap<u8, Monkey>;
 pub type Output = u64;
@@ -235,4 +235,4 @@ pub fn part_two(monkeys: &Intermediate) -> Option<Output> {
 	Some(monkey_business)
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

@@ -96,4 +96,4 @@ pub fn part_two(school: &Intermediate) -> Option<Output> {
 	Some(school_size(&school))
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

@@ -177,4 +177,4 @@ pub fn part_two(subsystem: &Intermediate) -> Option<Output> {
 	Some(valid_line_scores[valid_line_scores.len() / 2])
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

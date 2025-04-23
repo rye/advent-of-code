@@ -23,10 +23,10 @@ pub fn part_two(input: &Intermediate) -> Option<Output> {
 	grid_values().find(|n| n > input)
 }
 
-daocutil::test_example!(part_one_1, parse, part_one, "1", Some(0));
-daocutil::test_example!(part_one_12, parse, part_one, "12", Some(3));
-daocutil::test_example!(part_one_23, parse, part_one, "23", Some(2));
-daocutil::test_example!(part_one_1024, parse, part_one, "1024", Some(31));
+crate::test_example!(part_one_1, parse, part_one, "1", Some(0));
+crate::test_example!(part_one_12, parse, part_one, "12", Some(3));
+crate::test_example!(part_one_23, parse, part_one, "23", Some(2));
+crate::test_example!(part_one_1024, parse, part_one, "1024", Some(31));
 
 struct GridIter {
 	set: BTreeSet<(i32, i32)>,
@@ -123,4 +123,4 @@ fn grid_values_iter() {
 	assert_eq!(grid_values.next(), Some(5));
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

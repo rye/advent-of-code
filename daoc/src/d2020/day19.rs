@@ -194,4 +194,4 @@ pub fn part_two(_: &Intermediate) -> Option<Output> {
 	None
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

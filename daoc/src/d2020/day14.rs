@@ -220,4 +220,4 @@ impl core::str::FromStr for Program {
 #[cfg(test)]
 mod tests {}
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

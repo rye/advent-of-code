@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["daocutil", "daoc", "d2020", "d2021", "d2022", "d2023"]
+members = ["daoc"]
 
 [workspace.lints.clippy]
 all = { level = "deny", priority = -1 }
@@ -12,7 +12,6 @@ missing_errors_doc = "allow"
 
 [workspace.dependencies]
 anyhow = "1.0.93"
-daocutil = { path = "./daocutil" }
 itertools = "0.13.0"
 nu-ansi-term = "0.50.1"
 regex = "1.11.1"

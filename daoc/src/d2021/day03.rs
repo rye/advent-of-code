@@ -110,4 +110,4 @@ pub fn part_two(strings: &Intermediate) -> Option<Output> {
 	Some(oxygen_generator_rating * co2_scrubber_rating)
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

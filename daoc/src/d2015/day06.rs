@@ -272,4 +272,4 @@ impl Grid {
 	}
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

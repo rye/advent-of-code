@@ -45,4 +45,4 @@ pub fn part_two(program: &Intermediate) -> Option<Output> {
 	Some(*outputs.last().expect("expected an output"))
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

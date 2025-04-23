@@ -59,4 +59,4 @@ pub fn part_two(program: &Intermediate) -> Option<Output> {
 	Some(pair.0 * 100 + pair.1)
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

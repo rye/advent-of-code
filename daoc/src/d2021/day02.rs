@@ -135,4 +135,4 @@ pub fn part_two(commands: &Intermediate) -> Option<Output> {
 	Some(final_state.position * final_state.depth)
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

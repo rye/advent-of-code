@@ -124,4 +124,4 @@ mod is_nice_new {
 	}
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

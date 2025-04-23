@@ -143,4 +143,4 @@ pub fn part_two(crabs: &Intermediate) -> Option<Output> {
 	Some(min_fuel(crabs, cost_to_align_one_revised))
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

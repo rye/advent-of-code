@@ -258,7 +258,7 @@ pub fn part_two(moves: &Intermediate) -> Option<Output> {
 	Some(state.tail_history.len())
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_two_simple,
 	parse,
 	part_two,
@@ -266,7 +266,7 @@ daocutil::test_example!(
 	Some(1)
 );
 
-daocutil::test_example!(
+crate::test_example!(
 	part_two_larger,
 	parse,
 	part_two,
@@ -274,4 +274,4 @@ daocutil::test_example!(
 	Some(36)
 );
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

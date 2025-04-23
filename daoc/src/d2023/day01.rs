@@ -68,7 +68,7 @@ fn get_calibration_value_initial() {
 	assert_eq!(77, get_calibration_value("treb7uchet", false));
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_one_example,
 	parse,
 	part_one,
@@ -97,7 +97,7 @@ fn get_calibration_value_fancy() {
 	assert_eq!(76, get_calibration_value("7pqrstsixteen", true));
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_two_example,
 	parse,
 	part_two,
@@ -105,4 +105,4 @@ daocutil::test_example!(
 	Some(281)
 );
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

@@ -230,4 +230,4 @@ pub fn part_two(tree: &Intermediate) -> Option<Output> {
 	}
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

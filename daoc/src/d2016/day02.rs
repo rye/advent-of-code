@@ -95,7 +95,7 @@ impl Instruction {
 	}
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_one_example,
 	parse,
 	part_one,
@@ -149,7 +149,7 @@ static PART_ONE_MAP: phf::Map<[u8; 2], char> = phf_map! {
 	[3, 9] => '9',
 };
 
-daocutil::test_example!(
+crate::test_example!(
 	part_two_example,
 	parse,
 	part_two,
@@ -228,4 +228,4 @@ fn apply_map_to_number(
 	*map.get(&key).expect("expected a key")
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

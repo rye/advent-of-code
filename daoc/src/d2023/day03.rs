@@ -135,7 +135,7 @@ fn parts(schematic: &Intermediate) -> impl Iterator<Item = ((u32, u32), char, u3
 		})
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_one_example,
 	parse,
 	part_one,
@@ -161,7 +161,7 @@ pub fn part_two(schematic: &Intermediate) -> Option<Output> {
 	)
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_two_example,
 	parse,
 	part_two,
@@ -169,4 +169,4 @@ daocutil::test_example!(
 	Some(467_835)
 );
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

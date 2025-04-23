@@ -113,4 +113,4 @@ pub fn part_two((_, allergens): &Intermediate) -> Option<Output> {
 	Some(all_ingredients.join(","))
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

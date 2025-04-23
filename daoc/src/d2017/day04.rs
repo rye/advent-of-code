@@ -118,4 +118,4 @@ fn part_two_policy_correct() {
 	);
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

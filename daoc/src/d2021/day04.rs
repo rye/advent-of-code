@@ -133,4 +133,4 @@ pub fn part_two((calls, boards): &Intermediate) -> Option<Output> {
 	Some(score as usize)
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

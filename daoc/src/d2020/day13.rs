@@ -96,4 +96,4 @@ pub fn part_two((_timestamp, bus_intervals): &Intermediate) -> Option<Output> {
 	Some(crt(&divisors_and_remainders))
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

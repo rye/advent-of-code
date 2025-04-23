@@ -160,7 +160,7 @@ pub fn part_two(program: &Intermediate) -> Option<Output> {
 	max
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_two_139629729,
 	parse,
 	part_two,
@@ -168,7 +168,7 @@ daocutil::test_example!(
 	Some(139_629_729)
 );
 
-daocutil::test_example!(
+crate::test_example!(
 	part_two_18216,
 	parse,
 	part_two,
@@ -176,4 +176,4 @@ daocutil::test_example!(
 	Some(18_216)
 );
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

@@ -81,4 +81,4 @@ pub fn part_two(numbers: &Intermediate) -> Option<Output> {
 	result
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

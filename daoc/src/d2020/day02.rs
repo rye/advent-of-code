@@ -86,4 +86,4 @@ pub fn part_two(rules: &Intermediate) -> Option<Output> {
 #[cfg(test)]
 mod tests;
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

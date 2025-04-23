@@ -82,7 +82,7 @@ pub fn part_one(lines: &Intermediate) -> Option<Output> {
 
 #[test]
 fn part_one_example() {
-	daocutil::test_example!(
+	crate::test_example!(
 		"30373\n25512\n65332\n33549\n35390",
 		part_one,
 		parse,
@@ -133,7 +133,7 @@ pub fn part_two(lines: &Intermediate) -> Option<Output> {
 
 #[test]
 fn part_two_example() {
-	daocutil::test_example!(
+	crate::test_example!(
 		"30373\n25512\n65332\n33549\n35390",
 		part_two,
 		parse,
@@ -141,4 +141,4 @@ fn part_two_example() {
 	);
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

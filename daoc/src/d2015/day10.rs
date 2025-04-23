@@ -106,4 +106,4 @@ mod look_and_say {
 	}
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

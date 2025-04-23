@@ -114,4 +114,4 @@ pub fn part_two(instructions: &Intermediate) -> Option<Output> {
 	accumulator
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

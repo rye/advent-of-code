@@ -232,4 +232,4 @@ pub fn part_two(_intermediate: &Intermediate) -> Option<Output> {
 	None
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

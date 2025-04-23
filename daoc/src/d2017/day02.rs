@@ -45,7 +45,7 @@ pub fn part_two(spreadsheet: &Intermediate) -> Option<Output> {
 	)
 }
 
-daocutil::test_example!(
+crate::test_example!(
 	part_one_example,
 	parse,
 	part_one,
@@ -53,7 +53,7 @@ daocutil::test_example!(
 	Some(18)
 );
 
-daocutil::test_example!(
+crate::test_example!(
 	part_two_example,
 	parse,
 	part_two,
@@ -61,4 +61,4 @@ daocutil::test_example!(
 	Some(9)
 );
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

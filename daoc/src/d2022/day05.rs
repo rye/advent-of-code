@@ -203,4 +203,4 @@ pub fn part_two((state, moves): &Intermediate) -> Option<Output> {
 	Some(state.tops_concat())
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

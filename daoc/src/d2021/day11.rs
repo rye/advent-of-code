@@ -40,4 +40,4 @@ pub fn part_two(state: &Intermediate) -> Option<Output> {
 	Some(step_counter)
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

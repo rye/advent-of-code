@@ -242,4 +242,4 @@ pub fn parse(input: &str) -> Result<Intermediate, core::convert::Infallible> {
 	Ok((images, matches))
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

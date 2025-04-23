@@ -40,4 +40,4 @@ pub fn part_two(stub: &Intermediate) -> Option<Output> {
 		.map(|tuple| tuple.0)
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

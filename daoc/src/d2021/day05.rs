@@ -226,4 +226,4 @@ pub fn part_two(segments: &Intermediate) -> Option<Output> {
 	Some(overlaps)
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

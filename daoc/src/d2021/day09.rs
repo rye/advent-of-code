@@ -157,4 +157,4 @@ fn part_two_examples() {
 	assert_eq!(Some(1134), part_two(&height_map));
 }
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);

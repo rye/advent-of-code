@@ -23,7 +23,7 @@ pub fn part_one(module_weights: &Intermediate) -> Option<Output> {
 	Some(fuel_weight_sum)
 }
 
-daocutil::generate_example_tests!(
+crate::generate_example_tests!(
 	parse, part_one,
 	fuel_part_one_12 | "12" => Some(2),
 	fuel_part_one_14 | "14" => Some(2),
@@ -63,11 +63,11 @@ pub fn part_two(module_weights: &Intermediate) -> Option<Output> {
 	Some(fuel_weight_sum)
 }
 
-daocutil::generate_example_tests!(
+crate::generate_example_tests!(
 	parse, part_two,
 	fuel_part_two_14 | "14" => Some(2),
 	fuel_part_two_1969 | "1969" => Some(966),
 	fuel_part_two_100756 | "100756" => Some(50346)
 );
 
-daocutil::generate_solver!(solve, =>, self);
+crate::generate_solver!(solve, =>, self);
