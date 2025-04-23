@@ -70,15 +70,13 @@ pub fn valid_height(s: &str) -> bool {
 
 pub fn valid_hair_color(s: &str) -> bool {
 	if let Some(rest) = s.strip_prefix('#') {
-		let is_digit_and_lowercase = rest.chars().all(|ch| {
+		rest.chars().all(|ch| {
 			if ch.is_ascii_hexdigit() && !ch.is_ascii_digit() {
 				ch.is_lowercase()
 			} else {
 				ch.is_ascii_digit()
 			}
-		});
-
-		is_digit_and_lowercase
+		})
 	} else {
 		false
 	}
