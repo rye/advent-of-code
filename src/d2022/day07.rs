@@ -1,3 +1,5 @@
+#![allow(clippy::infallible_try_from)]
+
 use {core::convert::Infallible, std::collections::BTreeMap};
 
 #[derive(Debug)]
@@ -124,10 +126,11 @@ fn convert_tree_to_directory_sizes(
 
 	for (directory, directory_size) in &mut directory_sizes {
 		for (entry, size) in tree {
-			if let Some(size) = size {
-				if directory.len() <= entry.len() && &entry[0..directory.len()] == directory.as_slice() {
-					*directory_size += size;
-				}
+			if let Some(size) = size
+				&& directory.len() <= entry.len()
+				&& &entry[0..directory.len()] == directory.as_slice()
+			{
+				*directory_size += size;
 			}
 		}
 	}

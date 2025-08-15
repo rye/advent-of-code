@@ -32,13 +32,11 @@ impl HeightMap {
 				if let (Some(x), Some(y)) = (
 					u32::try_from(i32::try_from(*x).unwrap() + x_offset).ok(),
 					u32::try_from(i32::try_from(*y).unwrap() + y_offset).ok(),
-				) {
-					if let Some(neighbor_value) = self.points.get(&(x, y)) {
-						if neighbor_value <= height {
+				)
+					&& let Some(neighbor_value) = self.points.get(&(x, y))
+						&& neighbor_value <= height {
 							return false;
 						}
-					}
-				}
 			}
 
 			true

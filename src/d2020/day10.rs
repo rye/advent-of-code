@@ -13,7 +13,7 @@ pub fn parse(input: &str) -> Result<Intermediate, core::convert::Infallible> {
 	))
 }
 
-pub fn part_one(differences: &Intermediate) -> Option<usize> {
+pub fn part_one(differences: &Intermediate) -> Option<Output> {
 	let one_offs_count = differences
 		.iter()
 		.filter(|difference| **difference == 1)
@@ -27,7 +27,7 @@ pub fn part_one(differences: &Intermediate) -> Option<usize> {
 	Some(one_offs_count * three_offs_count)
 }
 
-pub fn part_two(differences: &Intermediate) -> Option<usize> {
+pub fn part_two(differences: &Intermediate) -> Option<Output> {
 	let mut arrangement = vec![0];
 
 	differences.iter().fold(0, |current, jolts| {

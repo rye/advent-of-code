@@ -1,23 +1,20 @@
-pub type Intermediate = ();
-pub type Output = u32;
+use crate::{PartSolve, Solver, export_solver};
 
-/// Parses the input data and returns an `Intermediate` type.
-///
-/// # Errors
-pub fn parse(_data: &str) -> anyhow::Result<Intermediate> {
-	Ok(())
+#[derive(Default)]
+struct Solution;
+
+impl PartSolve for Solution {
+	fn parse(&mut self, _input: &str) -> anyhow::Result<Box<dyn core::any::Any>> {
+		Ok(Box::new(()))
+	}
+
+	fn part_one(&self, _intermediate: &Box<dyn core::any::Any>) -> Option<String> {
+		None
+	}
+
+	fn part_two(&self, _intermediate: &Box<dyn core::any::Any>) -> Option<String> {
+		None
+	}
 }
 
-/// Processes the parsed intermediate data and determines the solution for part one.
-#[must_use]
-pub fn part_one(_intermediate: &Intermediate) -> Option<Output> {
-	None
-}
-
-/// Processes the parsed intermediate data and determines the solution for part one.
-#[must_use]
-pub fn part_two(_intermediate: &Intermediate) -> Option<Output> {
-	None
-}
-
-crate::generate_solver!(solve, =>, self);
+export_solver!(solver, Solver::PartSolve(Box::new(Solution)));

@@ -171,7 +171,7 @@ pub struct Message<'x>(&'x str);
 pub type Intermediate<'input> = (RuleSet, Vec<Message<'input>>);
 type Output = usize;
 
-pub fn parse(data: &str) -> Result<Intermediate, core::convert::Infallible> {
+pub fn parse(data: &str) -> Result<Intermediate<'_>, core::convert::Infallible> {
 	let split: Vec<&str> = data.split("\n\n").collect();
 
 	let messages: Vec<Message> = split[1].lines().map(Message).collect();

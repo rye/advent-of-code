@@ -72,11 +72,10 @@ pub fn part_two(numbers: &Intermediate) -> Option<Output> {
 
 	let mut result = None;
 
-	if let Some(set) = find_weakness(numbers, impostor) {
-		if let (Some(max), Some(min)) = (set.iter().max(), set.iter().min()) {
+	if let Some(set) = find_weakness(numbers, impostor)
+		&& let (Some(max), Some(min)) = (set.iter().max(), set.iter().min()) {
 			result = Some(max + min);
 		}
-	}
 
 	result
 }
