@@ -1,30 +1,21 @@
 use core::error::Error;
 use std::env::Args;
 
-use aoc::SolverClass;
+use aoc::{RunConstraints, Solver, gather_matching_solvers};
 
-pub type Solver = fn(&str) -> Result<(), Box<dyn Error>>;
+const NO_CONSTRAINTS_RUN_ALL: bool = false;
 
 fn main() -> Result<(), Box<dyn Error>> {
 	// Ignore the first argument (the program name)
 	let (year_constraints, day_constraints) = parse_year_day(std::env::args());
 
-	// Build the plan from the SOLVER_GLOBAL_MAP.
-	// This involves crawling the SOLVER_GLOBAL_MAP and finding all solvers that match the year and day constriants.
-
-	let solvers_to_run: std::collections::BTreeSet<(u16, u8, &SolverClass)> = aoc::SOLVER_GLOBAL_MAP
-		.entries()
-		.flat_map(|(year, days)| days.entries().map(|(day, solver)| (*year, *day, solver)))
-		.filter(|(year, day, _)| {
-			(year_constraints.is_none() || year_constraints == Some(*year))
-				&& (day_constraints.is_none() || day_constraints == Some(*day))
-		})
-		.collect();
+	let constraints = RunConstraints::new(year_constraints, day_constraints, NO_CONSTRAINTS_RUN_ALL);
+	let solvers_to_run = gather_matching_solvers(&constraints);
 
 	println!("Running {} solver(s).", solvers_to_run.len());
 
 	for (year, day, solver) in solvers_to_run {
-		println!("Running solver for year {year} day {day}.");
+		println!("Running solver for year {year} day {day}:");
 
 		let file_path = find_input_file(year, day);
 
@@ -38,8 +29,22 @@ fn main() -> Result<(), Box<dyn Error>> {
 
 		match solver {
 			// "Original"-class solvers simply take an &str, perform their operations, and print the output.
-			SolverClass::Original(solver) => {
+			Solver::Original(solver) => {
 				solver(&data)?;
+			}
+			Solver::PartSolve(mut part_solver) => {
+				let intermediate = part_solver.parse(&data)?;
+
+				if let Some(result) = part_solver.part_one(&intermediate) {
+					println!("Part One: {result}");
+				}
+
+				if let Some(result) = part_solver.part_two(&intermediate) {
+					println!("Part Two: {result}");
+				}
+			}
+			_ => {
+				println!("Unsupported solver type for year {year} day {day}. Skipped.");
 			}
 		}
 	}

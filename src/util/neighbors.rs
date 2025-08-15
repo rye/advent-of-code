@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 const OFFSETS_INCLUDING_DIAGS: [(i32, i32); 8] = [
 	(-1, 1),
 	(0, 1),

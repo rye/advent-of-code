@@ -1,55 +1,29 @@
-use crate::SolverClass;
+use crate::Solver;
 
-mod day01;
-mod day02;
-mod day03;
-mod day04;
-mod day05;
-mod day06;
-mod day07;
-// mod day08;
-mod day09;
-mod day10;
-// mod day11;
-// mod day12;
-// mod day13;
-// mod day14;
-// mod day15;
-// mod day16;
-// mod day17;
-// mod day18;
-// mod day19;
-// mod day20;
-// mod day21;
-// mod day22;
-// mod day23;
-// mod day24;
-// mod day25;
-
-pub(crate) const SOLVER_MAP: phf::Map<u8, SolverClass> = phf::phf_map! {
-	1u8 => SolverClass::Original(day01::solve),
-	2u8 => SolverClass::Original(day02::solve),
-	3u8 => SolverClass::Original(day03::solve),
-	4u8 => SolverClass::Original(day04::solve),
-	5u8 => SolverClass::Original(day05::solve),
-	6u8 => SolverClass::Original(day06::solve),
-	7u8 => SolverClass::Original(day07::solve),
-	// 8u8 => SolverClass::Original(day08::solve),
-	9u8 => SolverClass::Original(day09::solve),
-	10u8 => SolverClass::Original(day10::solve),
-	// 11u8 => SolverClass::Original(day11::solve),
-	// 12u8 => SolverClass::Original(day12::solve),
-	// 13u8 => SolverClass::Original(day13::solve),
-	// 14u8 => SolverClass::Original(day14::solve),
-	// 15u8 => SolverClass::Original(day15::solve),
-	// 16u8 => SolverClass::Original(day16::solve),
-	// 17u8 => SolverClass::Original(day17::solve),
-	// 18u8 => SolverClass::Original(day18::solve),
-	// 19u8 => SolverClass::Original(day19::solve),
-	// 20u8 => SolverClass::Original(day20::solve),
-	// 21u8 => SolverClass::Original(day21::solve),
-	// 22u8 => SolverClass::Original(day22::solve),
-	// 23u8 => SolverClass::Original(day23::solve),
-	// 24u8 => SolverClass::Original(day24::solve),
-	// 25u8 => SolverClass::Original(day25::solve),
-};
+crate::gen_gather_matching_solvers!(2015,
+	day01 (1) => Solver::Original(day01::solve),
+	day02 (2) => Solver::Original(day02::solve),
+	day03 (3) => Solver::Original(day03::solve),
+	day04 (4) => Solver::Original(day04::solve),
+	day05 (5) => Solver::Original(day05::solve),
+	day06 (6) => Solver::Original(day06::solve),
+	day07 (7) => Solver::Original(day07::solve),
+	// day08 (8) => day08::solver(),
+	day09 (9) => Solver::Original(day09::solve),
+	day10 (10) => Solver::Original(day10::solve),
+	// day11 (11) => day11::solver(),
+	// day12 (12) => day12::solver(),
+	// day13 (13) => day13::solver(),
+	// day14 (14) => day14::solver(),
+	// day15 (15) => day15::solver(),
+	// day16 (16) => day16::solver(),
+	// day17 (17) => day17::solver(),
+	// day18 (18) => day18::solver(),
+	// day19 (19) => day19::solver(),
+	// day20 (20) => day20::solver(),
+	// day21 (21) => day21::solver(),
+	// day22 (22) => day22::solver(),
+	// day23 (23) => day23::solver(),
+	// day24 (24) => day24::solver(),
+	// day25 (25) => day25::solver(),
+);

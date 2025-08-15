@@ -47,7 +47,7 @@ pub type Intermediate<'a> = Vec<Rucksack<'a>>;
 pub type Output = u32;
 
 /// # Errors
-pub fn parse(str: &str) -> anyhow::Result<Intermediate> {
+pub fn parse(str: &str) -> anyhow::Result<Intermediate<'_>> {
 	Ok(str.lines().map(Rucksack::from).collect())
 }
 

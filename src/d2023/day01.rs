@@ -2,7 +2,7 @@ pub type Intermediate<'i> = Vec<&'i str>;
 pub type Output = u32;
 
 /// # Errors
-pub fn parse(input: &str) -> anyhow::Result<Intermediate> {
+pub fn parse(input: &str) -> anyhow::Result<Intermediate<'_>> {
 	Ok(input.lines().collect())
 }
 

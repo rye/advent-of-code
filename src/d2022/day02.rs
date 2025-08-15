@@ -1,3 +1,5 @@
+#![allow(clippy::infallible_try_from)]
+
 use core::{convert::Infallible, str::FromStr};
 
 pub enum Move {
@@ -111,7 +113,7 @@ pub type Intermediate<'i> = Vec<StrategyPart<'i>>;
 pub type Output = u32;
 
 /// # Errors
-pub fn parse(str: &str) -> anyhow::Result<Intermediate> {
+pub fn parse(str: &str) -> anyhow::Result<Intermediate<'_>> {
 	Ok(
 		str
 			.lines()

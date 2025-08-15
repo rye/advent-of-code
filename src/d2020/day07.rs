@@ -1,5 +1,10 @@
+#![allow(dead_code)]
+
 use regex::Regex;
 
+// TODO: This file is a temporary solution to generate the Prolog rules for the bag contents problem.
+// It should be either replaced with a fully-fledged solution, or the implementation should
+// itself invoke a Prolog interpreter to handle the rules.
 pub fn process_color(color: &str) -> String {
 	color.replace(' ', "_")
 }

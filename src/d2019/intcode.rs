@@ -324,6 +324,7 @@ impl Intcode {
 	pub fn run(mut self) -> Self {
 		loop {
 			if self.step().is_none() {
+				debug_assert!(self.did_halt(), "Intcode program halted");
 				break self;
 			}
 		}

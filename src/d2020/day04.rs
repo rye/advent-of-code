@@ -85,7 +85,7 @@ pub fn valid_hair_color(s: &str) -> bool {
 pub type Intermediate<'a> = Vec<HashMap<&'a str, &'a str>>;
 pub type Output = usize;
 
-pub fn parse(data: &str) -> Result<Intermediate, core::convert::Infallible> {
+pub fn parse(data: &str) -> Result<Intermediate<'_>, core::convert::Infallible> {
 	// To start with, passports are separated by \n\n
 	let passports: Vec<&str> = data.split("\n\n").collect();
 

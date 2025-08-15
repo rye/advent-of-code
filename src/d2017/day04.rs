@@ -4,7 +4,7 @@ pub type Intermediate<'input> = Vec<&'input str>;
 pub type Output = usize;
 
 /// # Errors
-pub fn parse(input: &str) -> anyhow::Result<Intermediate> {
+pub fn parse(input: &str) -> anyhow::Result<Intermediate<'_>> {
 	let passwords = input.lines().collect();
 	Ok(passwords)
 }

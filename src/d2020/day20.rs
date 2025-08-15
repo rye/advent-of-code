@@ -199,7 +199,7 @@ pub fn part_two((images, matches): &Intermediate) -> Option<Output> {
 	}
 }
 
-pub fn parse(input: &str) -> Result<Intermediate, core::convert::Infallible> {
+pub fn parse(input: &str) -> Result<Intermediate<'_>, core::convert::Infallible> {
 	let images: Vec<(usize, Image)> = input
 		.split("\n\n")
 		.map(|spec| {

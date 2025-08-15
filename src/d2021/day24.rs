@@ -245,7 +245,7 @@ pub fn part_one((alu, program): &Intermediate) -> Option<Output> {
 	let earliest_valid = generate_valid_model_numbers()
 		.inspect(|_n| {
 			counter += 1;
-			if counter % 1_000_000 == 0 {
+			if counter.is_multiple_of(1_000_000) {
 				println!(
 					"Processed {} of {} ({}%)",
 					counter,
