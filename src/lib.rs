@@ -1,6 +1,7 @@
 #![allow(clippy::unnecessary_wraps, clippy::trivially_copy_pass_by_ref)]
 
 use core::{any::Any, error::Error};
+use std::collections::BTreeSet;
 
 mod d2015;
 mod d2016;
@@ -31,6 +32,11 @@ pub enum Solver {
 pub trait PartSolve {
 	/// Parse the provided `input` to an intermediate type.
 	/// The resulting data will be passed in to `part_one` and `part_two`.
+	///
+	/// # Errors
+	///
+	/// If parsing fails for an unrecoverable reason, implementations can/should
+	/// return an `Err` value.
 	fn parse(&mut self, input: &str) -> anyhow::Result<Box<dyn Any>>;
 
 	/// Solve the first part of the puzzle.
@@ -41,52 +47,103 @@ pub trait PartSolve {
 }
 
 /// Execution constraints controlling which solvers will be selected.
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone)]
 pub struct RunConstraints {
-	year: Option<u16>,
-	day: Option<u8>,
+	years: Option<BTreeSet<u16>>,
+	days: Option<BTreeSet<u8>>,
 	/// If true and both year/day are None, run all solvers.
 	run_all_if_unconstrained: bool,
 }
 
 impl RunConstraints {
-	pub fn new(year: Option<u16>, day: Option<u8>, run_all_if_unconstrained: bool) -> Self {
+	/// Determine constraints from command-line arguments.
+	pub fn parse_from_args(args: std::env::Args) -> Self {
+		#[derive(Debug)]
+		enum SolverParam {
+			#[allow(dead_code)]
+			Unknown(String),
+			Year(u16),
+			Day(u8),
+		}
+
+		impl core::str::FromStr for SolverParam {
+			type Err = core::convert::Infallible;
+
+			fn from_str(str: &str) -> Result<Self, Self::Err> {
+				match (str.parse::<u16>(), str.parse::<u8>()) {
+					(_, Ok(u8)) if (1..=25).contains(&u8) => Ok(SolverParam::Day(u8)),
+					(Ok(u16), _) if (2015..).contains(&u16) => Ok(SolverParam::Year(u16)),
+					_ => Ok(SolverParam::Unknown(str.to_string())),
+				}
+			}
+		}
+
+		let mut years: Option<BTreeSet<u16>> = None;
+		let mut days: Option<BTreeSet<u8>> = None;
+
+		let run_all_if_unconstrained = false;
+
+		let Some(inferred_constraint_parameters) = args
+			.map(|arg| arg.parse::<SolverParam>())
+			.collect::<Result<Vec<SolverParam>, _>>()
+			.ok()
+		else {
+			return Self {
+				years,
+				days,
+				run_all_if_unconstrained,
+			};
+		};
+
+		for param in inferred_constraint_parameters {
+			match param {
+				SolverParam::Year(y) => {
+					years.get_or_insert_with(BTreeSet::new).insert(y);
+				}
+				SolverParam::Day(d) => {
+					days.get_or_insert_with(BTreeSet::new).insert(d);
+				}
+				SolverParam::Unknown(_) => {}
+			}
+		}
+
 		Self {
-			year,
-			day,
+			years,
+			days,
 			run_all_if_unconstrained,
 		}
 	}
 
 	/// Returns true if a solver for a particular year and day is allowed under this set of constraints.
 	fn allows(&self, year: u16, day: u8) -> bool {
-		match (self.run_all_if_unconstrained, self.year, self.day) {
+		match (self.run_all_if_unconstrained, &self.years, &self.days) {
+			// If no year/day specified, fall back to run_all_if_unconstrained.
 			(true, None, None) => true,
 			(false, None, None) => false,
-			(_, Some(req_year), None) => year == req_year,
-			(_, None, Some(req_day)) => day == req_day,
-			(_, Some(req_year), Some(req_day)) => year == req_year && day == req_day,
+			// If either year or day is specified, match against what was given (could be odd in the day case).
+			(_, Some(req_year), None) => req_year.contains(&year),
+			(_, None, Some(req_day)) => req_day.contains(&day),
+			// If both year and day are specified, use both constraints (strictest).
+			(_, Some(req_year), Some(req_day)) => req_year.contains(&year) && req_day.contains(&day),
 		}
 	}
 
 	/// Conditionally offer a solver; if constraints allow, push onto output list.
-	pub fn offer(&self, year: u16, day: u8, solver: Solver, out: &mut Vec<(u16, u8, Solver)>) {
+	pub fn offer(
+		&self,
+		year: u16,
+		day: u8,
+		solver: Solver,
+		out: &mut impl Extend<(u16, u8, Solver)>,
+	) {
 		if self.allows(year, day) {
-			out.push((year, day, solver));
+			out.extend([(year, day, solver)]);
 		}
-	}
-
-	/// Accessor for optional year (for external logic if ever needed).
-	pub fn year(&self) -> Option<u16> {
-		self.year
-	}
-	/// Accessor for optional day.
-	pub fn day(&self) -> Option<u8> {
-		self.day
 	}
 }
 
 /// Gather all solvers matching the provided constraints.
+#[must_use]
 pub fn gather_matching_solvers(constraints: &RunConstraints) -> Vec<(u16, u8, Solver)> {
 	let mut solvers: Vec<(u16, u8, Solver)> = Vec::new();
 
@@ -122,10 +179,10 @@ macro_rules! gen_gather_matching_solvers {
 			mod $mod_ident;
 		)+
 
-		// Generate gatherer function
+		// Generate gatherer function for this year.
 		pub(crate) fn gather_matching_solvers(
 			constraints: &$crate::RunConstraints,
-			out: &mut Vec<(u16, u8, $crate::Solver)>,
+			out: &mut impl Extend<(u16, u8, $crate::Solver)>,
 		) {
 			let year = $year;
 			$(
