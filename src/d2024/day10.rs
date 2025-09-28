@@ -7,7 +7,10 @@ struct Solution;
 
 struct Grid(Vec<Vec<u8>>);
 
-type Path = Vec<(usize, usize)>;
+type Point = (usize, usize);
+type Trailhead = Point;
+type Path = Vec<Point>;
+type PointSet = HashSet<Point>;
 
 impl Grid {
 	// Hiking trails never include diagonal steps, only up/down/left/right.
@@ -46,14 +49,15 @@ impl Grid {
 
 		stack.push((start, Vec::new()));
 
+		// DFS-like algorithm. We're carrying some state with the positions, which is the path taken to get to the point
+		// we are currently at.
 		while let Some(((x, y), path)) = stack.pop() {
 			let mut path_amended = path.clone();
 
 			path_amended.push((x, y));
 
-			// If goal, add path to paths.
+			// If we reached our goal
 			if self.0[y][x] == 9 {
-				// We've reached our goal. Add the amended path to the set of paths, then don't enqueue anything.
 				paths.entry((x, y)).or_default().insert(path_amended);
 				continue;
 			}
@@ -67,7 +71,8 @@ impl Grid {
 			}
 		}
 
-		if false {
+		#[cfg(test)]
+		{
 			for (dest, paths) in &paths {
 				println!(
 					"Found {} unique paths from trailhead ({},{}) to destination ({},{})",
@@ -88,6 +93,68 @@ impl Grid {
 		u32::try_from(paths.keys().count()).unwrap()
 	}
 
+	fn rate_trailhead(&self, start: (usize, usize)) -> u32 {
+		// Here, we'll do DFS from the trailhead, looking for a 9, building a "path" as we go.
+
+		let mut stack: Vec<(Point, Path, PointSet)> =
+			Vec::with_capacity(self.0.len() * self.0[0].len());
+
+		let mut destination_incoming_paths: BTreeMap<Point, BTreeSet<Path>> = BTreeMap::new();
+		let mut trailhead_outgoing_paths: BTreeMap<Trailhead, BTreeSet<Path>> = BTreeMap::new();
+
+		stack.push((start, Vec::new(), PointSet::new()));
+
+		// DFS-like algorithm. We're carrying some state with the positions, which is the path taken to get to the point
+		// we are currently at.
+		while let Some(((x, y), path, visited)) = stack.pop() {
+			let mut path_amended = path.clone();
+			let mut visited_amended = visited.clone();
+
+			path_amended.push((x, y));
+
+			// If we reached our goal
+			if self.0[y][x] == 9 {
+				destination_incoming_paths
+					.entry((x, y))
+					.or_default()
+					.insert(path_amended.clone());
+				trailhead_outgoing_paths
+					.entry(start)
+					.or_default()
+					.insert(path_amended.clone());
+				continue;
+			}
+
+			visited_amended.insert((x, y));
+
+			for (nx, ny) in self.legal_moves((x, y)) {
+				if !visited_amended.contains(&(nx, ny)) {
+					stack.push(((nx, ny), path_amended.clone(), visited_amended.clone()));
+				}
+			}
+		}
+
+		#[cfg(test)]
+		{
+			for (src, paths) in &trailhead_outgoing_paths {
+				println!(
+					"Found {} unique paths from trailhead ({},{}) to any destination",
+					paths.len(),
+					src.0,
+					src.1,
+				);
+			}
+		}
+
+		u32::try_from(
+			trailhead_outgoing_paths
+				.get(&start)
+				.map_or(0, BTreeSet::len),
+		)
+		.unwrap()
+	}
+
+	#[allow(dead_code)]
 	fn display_path(&self, path: &Path) {
 		let points: HashSet<(usize, usize)> = path.iter().copied().collect();
 
@@ -126,7 +193,6 @@ impl PartSolve for Solution {
 	fn part_one(&self, grid: &Box<dyn core::any::Any>) -> Option<String> {
 		let grid = grid.downcast_ref::<Grid>()?;
 
-		// Find trailheads (positions with height 0).
 		let mut trailheads: Vec<(usize, usize)> = Vec::new();
 
 		for (y, row) in grid.0.iter().enumerate() {
@@ -146,12 +212,30 @@ impl PartSolve for Solution {
 		)
 	}
 
-	fn part_two(&self, _intermediate: &Box<dyn core::any::Any>) -> Option<String> {
-		None
+	fn part_two(&self, grid: &Box<dyn core::any::Any>) -> Option<String> {
+		let grid = grid.downcast_ref::<Grid>()?;
+
+		let mut trailheads: Vec<(usize, usize)> = Vec::new();
+
+		for (y, row) in grid.0.iter().enumerate() {
+			for (x, &height) in row.iter().enumerate() {
+				if height == 0 {
+					trailheads.push((x, y));
+				}
+			}
+		}
+
+		Some(
+			trailheads
+				.iter()
+				.map(|trailhead| grid.rate_trailhead(*trailhead))
+				.sum::<u32>()
+				.to_string(),
+		)
 	}
 }
 
 export_solver!(solver, Solver::PartSolve(Box::new(Solution)));
 
 part_test!(part_one, Solution, file "day10.example.in.txt", part_one, literal "36");
-part_test!(part_two, Solution, file "day10.example.in.txt", part_two, None);
+part_test!(part_two, Solution, file "day10.example.in.txt", part_two, literal "81");
