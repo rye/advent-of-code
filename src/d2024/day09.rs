@@ -186,8 +186,6 @@ impl Disk {
 			// Find the first gap that is equal to or larger than the size of the file.
 			// If found, move the entire file to the start of that gap.
 			if let Some(gap) = Self::pick_gap(&gap_ranges, file_range.clone()) {
-				println!("Moving file {file_id} from {file_range:?} of size {file_size} to gap {gap:?}");
-
 				// We found a gap that can fit the file.
 				self.move_block(file_range.clone(), gap.clone());
 
