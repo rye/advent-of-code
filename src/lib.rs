@@ -207,17 +207,17 @@ macro_rules! gen_gather_matching_solvers {
 /// struct Solution;
 ///
 /// impl PartSolve for Solution {
-/// 	fn parse(&mut self, _input: &str) -> anyhow::Result<Box<dyn core::any::Any>> {
-/// 		Ok(Box::new(()))
-/// 	}
+///     fn parse(&mut self, _input: &str) -> anyhow::Result<Box<dyn core::any::Any>> {
+///         Ok(Box::new(()))
+///     }
 ///
-/// 	fn part_one(&self, _intermediate: &Box<dyn core::any::Any>) -> Option<String> {
-/// 		None
-/// 	}
+///     fn part_one(&self, _intermediate: &Box<dyn core::any::Any>) -> Option<String> {
+///         None
+///     }
 ///
-/// 	fn part_two(&self, _intermediate: &Box<dyn core::any::Any>) -> Option<String> {
-/// 		None
-/// 	}
+///     fn part_two(&self, _intermediate: &Box<dyn core::any::Any>) -> Option<String> {
+///         None
+///     }
 /// }
 ///
 /// export_solver!(solver, Solver::PartSolve(Box::new(Solution)));
