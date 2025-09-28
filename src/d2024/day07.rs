@@ -1,6 +1,6 @@
 use itertools::{Itertools, repeat_n};
 
-use crate::{PartSolve, Solver, export_solver};
+use crate::{PartSolve, Solver, export_solver, part_test};
 
 #[derive(Default)]
 struct Solution;
@@ -163,20 +163,6 @@ impl PartSolve for Solution {
 
 export_solver!(solver, Solver::PartSolve(Box::new(Solution)));
 
-#[test]
-fn part_one() {
-	let mut solver = Solution;
+part_test!(part_one, Solution, file "day07.example.in.txt", part_one, literal "3749");
 
-	let intermediate = solver.parse(include_str!("day07.example.in.txt")).unwrap();
-
-	assert_eq!(Some("3749".to_string()), solver.part_one(&intermediate));
-}
-
-#[test]
-fn part_two() {
-	let mut solver = Solution;
-
-	let intermediate = solver.parse(include_str!("day07.example.in.txt")).unwrap();
-
-	assert_eq!(Some("11387".to_string()), solver.part_two(&intermediate));
-}
+part_test!(part_two, Solution, file "day07.example.in.txt", part_two, literal "11387");

@@ -191,3 +191,104 @@ macro_rules! gen_gather_matching_solvers {
 		}
 	};
 }
+
+/// Generate a test function for a part function of a solver.
+///
+/// # Examples
+///
+/// There are several variations of this macro to help easily build out the tests as information becomes available.
+///
+/// ## No input, no expected output
+///
+/// ```
+/// use crate::{PartSolve, Solver, export_solver, part_test};
+///
+/// #[derive(Default)]
+/// struct Solution;
+///
+/// impl PartSolve for Solution {
+/// 	fn parse(&mut self, _input: &str) -> anyhow::Result<Box<dyn core::any::Any>> {
+/// 		Ok(Box::new(()))
+/// 	}
+///
+/// 	fn part_one(&self, _intermediate: &Box<dyn core::any::Any>) -> Option<String> {
+/// 		None
+/// 	}
+///
+/// 	fn part_two(&self, _intermediate: &Box<dyn core::any::Any>) -> Option<String> {
+/// 		None
+/// 	}
+/// }
+///
+/// export_solver!(solver, Solver::PartSolve(Box::new(Solution)));
+///
+/// part_test!(part_one_no_input_no_output, Solution, None, part_one, None);
+/// //         ^--+----------------------^  ^---+--^  ^--^  ^--+---^  ^--^
+/// //            |                             |      ^^      |       ^^
+/// //            |                             |  (no input)  |     (no expected output)
+/// //            |                             |              |
+/// //            |                             |              +-- fn to call on the solver after parsing completed
+/// //            |                             |
+/// //            |                             +-- Expr describing how to generate the "Solution" struct.
+/// //            |
+/// //            +-- Name of the test fn to create.
+///
+/// part_test!(part_two, Solution, None, part_two, None);
+/// ```
+#[macro_export]
+macro_rules! part_test {
+	($test_fn_name:ident, $make_solver_expr:expr, file $input_fname:literal, $part_fn_name:ident, None) => {
+		$crate::part_test! {
+			$test_fn_name,
+			let mut solver: Solution = $make_solver_expr,
+			let input: &str = include_str!($input_fname),
+			let intermediate: Box<dyn std::any::Any> = solver.parse(input).unwrap(),
+			let part_result = solver.$part_fn_name(&intermediate),
+			assert_eq!(None, part_result)
+		}
+	};
+
+	($test_fn_name:ident, $make_solver_expr:expr, None, $part_fn_name:ident, None) => {
+		$crate::part_test! {
+			$test_fn_name,
+			let mut solver: Solution = $make_solver_expr,
+			let input: &str = "",
+			let intermediate: Box<dyn std::any::Any> = solver.parse(input).unwrap(),
+			let part_result = solver.$part_fn_name(&intermediate),
+			assert_eq!(None, part_result)
+		}
+	};
+
+	($test_fn_name:ident, $make_solver_expr:expr, file $input_fname:literal, $part_fn_name:ident, literal $expected_output:literal) => {
+		$crate::part_test! {
+			$test_fn_name,
+			let mut solver: Solution = $make_solver_expr,
+			let input: &str = include_str!($input_fname),
+			let intermediate: Box<dyn std::any::Any> = solver.parse(input).unwrap(),
+			let part_result = solver.$part_fn_name(&intermediate),
+			assert_eq!(Some($expected_output.to_string()), part_result)
+		}
+	};
+
+	($test_fn_name:ident, $make_solver_expr:expr, file $input_fname:literal, $part_fn_name:ident, file $expected_output_file:literal) => {
+		$crate::part_test! {
+			$test_fn_name,
+			let mut solver: Solution = $make_solver_expr,
+			let input: &str = include_str!($input_fname),
+			let intermediate: Box<dyn std::any::Any> = solver.parse(input).unwrap(),
+			let part_result = solver.$part_fn_name(&intermediate),
+			assert_eq!(Some(include_str!($expected_output_file).trim().to_string()), part_result)
+		}
+	};
+
+	($test_fn_name:ident, $make_solver:stmt, $load_input:stmt, $parse_input:stmt, $call_solver_part_fn:stmt, $assert_expected_output:stmt) => {
+		#[test]
+		fn $test_fn_name() {
+			$make_solver
+			$load_input
+			$parse_input
+			$call_solver_part_fn
+			$assert_expected_output
+		}
+	}
+}

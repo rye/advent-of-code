@@ -1,4 +1,4 @@
-use crate::{PartSolve, Solver, export_solver};
+use crate::{PartSolve, Solver, export_solver, part_test};
 
 #[derive(Default)]
 struct Solution;
@@ -176,20 +176,6 @@ impl PartSolve for Solution {
 
 export_solver!(solver, Solver::PartSolve(Box::new(Solution)));
 
-#[test]
-fn part_one() {
-	let mut solver = Solution;
+part_test!(part_one, Solution::default(), file "day05.example.in.txt", part_one, literal "143");
 
-	let intermediate = solver.parse(include_str!("day05.example.in.txt")).unwrap();
-
-	assert_eq!(Some("143".to_string()), solver.part_one(&intermediate));
-}
-
-#[test]
-fn part_two() {
-	let mut solver = Solution;
-
-	let intermediate = solver.parse(include_str!("day05.example.in.txt")).unwrap();
-
-	assert_eq!(Some("123".to_string()), solver.part_two(&intermediate));
-}
+part_test!(part_two, Solution::default(), file "day05.example.in.txt", part_two, literal "123");

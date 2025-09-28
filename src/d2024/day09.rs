@@ -3,7 +3,7 @@ use std::{
 	ops::RangeInclusive,
 };
 
-use crate::{PartSolve, Solver, export_solver};
+use crate::{PartSolve, Solver, export_solver, part_test};
 
 #[derive(Default)]
 struct Solution;
@@ -384,20 +384,6 @@ impl PartSolve for Solution {
 
 export_solver!(solver, Solver::PartSolve(Box::new(Solution)));
 
-#[test]
-fn part_one() {
-	let mut solver = Solution;
+part_test!(part_one, Solution, file "day09.example.in.txt", part_one, literal "1928");
 
-	let intermediate = solver.parse(include_str!("day09.example.in.txt")).unwrap();
-
-	assert_eq!(Some("1928".to_string()), solver.part_one(&intermediate));
-}
-
-#[test]
-fn part_two() {
-	let mut solver = Solution;
-
-	let intermediate = solver.parse(include_str!("day09.example.in.txt")).unwrap();
-
-	assert_eq!(Some("2858".to_string()), solver.part_two(&intermediate));
-}
+part_test!(part_two, Solution, file "day09.example.in.txt", part_two, literal "2858");

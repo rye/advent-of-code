@@ -1,4 +1,4 @@
-use crate::{PartSolve, Solver, export_solver};
+use crate::{PartSolve, Solver, export_solver, part_test};
 
 #[derive(Default)]
 struct Solution;
@@ -18,3 +18,6 @@ impl PartSolve for Solution {
 }
 
 export_solver!(solver, Solver::PartSolve(Box::new(Solution)));
+
+part_test!(part_one, Solution, None, part_one, None);
+part_test!(part_two, Solution, None, part_two, None);
