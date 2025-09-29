@@ -1,4 +1,5 @@
-use core::error::Error;
+use core::{error::Error, time::Duration};
+use std::time::Instant;
 
 use aoc::{RunConstraints, Solver, gather_matching_solvers};
 
@@ -28,14 +29,37 @@ fn main() -> Result<(), Box<dyn Error>> {
 			}
 			// "PartSolve"-class solvers have a defined data structure which groups together the parsing & solving logic.
 			Solver::PartSolve(mut part_solver) => {
+				let t_start = Instant::now();
+
 				let intermediate = part_solver.parse(&data)?;
 
+				let t_parsed = Instant::now();
+
+				let mut t_solved_1: Option<Instant> = None;
+				let mut t_solved_2: Option<Instant> = None;
+
+				let t_solving_1 = Instant::now();
 				if let Some(result) = part_solver.part_one(&intermediate) {
+					t_solved_1 = Some(Instant::now());
 					println!("Part One: {result}");
 				}
 
+				let t_solving_2 = Instant::now();
 				if let Some(result) = part_solver.part_two(&intermediate) {
+					t_solved_2 = Some(Instant::now());
 					println!("Part Two: {result}");
+				}
+
+				if true {
+					let parse_dur = t_parsed.duration_since(t_start);
+					let part_one_dur: Option<Duration> = t_solved_1.map(|t| t.duration_since(t_solving_1));
+					let part_two_dur: Option<Duration> = t_solved_2.map(|t| t.duration_since(t_solving_2));
+
+					println!(
+						"  (timings: {{parse: {parse_dur:.1?}, part_one: {}, part_two: {}}})",
+						part_one_dur.map_or_else(|| "n/a".to_string(), |dur| format!("{dur:.1?}")),
+						part_two_dur.map_or_else(|| "n/a".to_string(), |dur| format!("{dur:.1?}")),
+					);
 				}
 			}
 			// Future solver types could be added. In case the handling hasn't been added yet, print out a line to stderr and skip running the year/day.
