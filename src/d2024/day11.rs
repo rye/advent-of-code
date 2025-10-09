@@ -123,7 +123,7 @@ impl PartSolve for Solution {
 		Ok(Box::new(RockLine { stones }))
 	}
 
-	fn part_one(&self, rock_line: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_one(&self, rock_line: &dyn core::any::Any) -> Option<String> {
 		let rock_line = rock_line.downcast_ref::<RockLine>()?;
 		let mut rock_line: RockLine = (*rock_line).clone();
 
@@ -136,7 +136,7 @@ impl PartSolve for Solution {
 		Some(rock_line.count().to_string())
 	}
 
-	fn part_two(&self, rock_line: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_two(&self, rock_line: &dyn core::any::Any) -> Option<String> {
 		let rock_line = rock_line.downcast_ref::<RockLine>()?;
 		let mut rock_line: RockLine = (*rock_line).clone();
 

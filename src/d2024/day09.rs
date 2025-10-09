@@ -350,7 +350,7 @@ impl PartSolve for Solution {
 		Ok(Box::new(disk_map))
 	}
 
-	fn part_one(&self, disk_map: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_one(&self, disk_map: &dyn core::any::Any) -> Option<String> {
 		let disk_map: &Vec<DiskMapDescriptor> = disk_map.downcast_ref::<Vec<DiskMapDescriptor>>()?;
 		let disk_map: Vec<DiskMapDescriptor> = disk_map.clone();
 
@@ -369,7 +369,7 @@ impl PartSolve for Solution {
 		Some(disk.checksum().to_string())
 	}
 
-	fn part_two(&self, disk_map: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_two(&self, disk_map: &dyn core::any::Any) -> Option<String> {
 		let disk_map: &Vec<DiskMapDescriptor> = disk_map.downcast_ref::<Vec<DiskMapDescriptor>>()?;
 		let disk_map: Vec<DiskMapDescriptor> = disk_map.clone();
 

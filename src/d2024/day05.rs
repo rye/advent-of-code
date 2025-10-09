@@ -140,7 +140,7 @@ impl PartSolve for Solution {
 		}))
 	}
 
-	fn part_one(&self, input: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_one(&self, input: &dyn core::any::Any) -> Option<String> {
 		let Input {
 			ordering_rules,
 			updates,
@@ -156,7 +156,7 @@ impl PartSolve for Solution {
 		Some(sum.to_string())
 	}
 
-	fn part_two(&self, input: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_two(&self, input: &dyn core::any::Any) -> Option<String> {
 		let Input {
 			ordering_rules,
 			updates,

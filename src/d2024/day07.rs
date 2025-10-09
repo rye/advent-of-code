@@ -121,7 +121,7 @@ impl PartSolve for Solution {
 		Ok(Box::new(equations))
 	}
 
-	fn part_one(&self, equations: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_one(&self, equations: &dyn core::any::Any) -> Option<String> {
 		let equations = equations.downcast_ref::<Vec<(u64, Vec<u64>)>>()?;
 
 		let mut sum: u64 = 0;
@@ -140,7 +140,7 @@ impl PartSolve for Solution {
 		Some(sum.to_string())
 	}
 
-	fn part_two(&self, equations: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_two(&self, equations: &dyn core::any::Any) -> Option<String> {
 		let equations = equations.downcast_ref::<Vec<(u64, Vec<u64>)>>()?;
 
 		let mut sum: u64 = 0;

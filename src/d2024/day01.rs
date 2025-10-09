@@ -21,7 +21,7 @@ impl PartSolve for Solution {
 		Ok(Box::new(lines.collect::<Vec<_>>()))
 	}
 
-	fn part_one(&self, pairs: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_one(&self, pairs: &dyn core::any::Any) -> Option<String> {
 		let (left, right) = pairs
 			.downcast_ref::<Vec<(i32, i32)>>()
 			// Unpack the pairs into two separate left/right lists.
@@ -58,7 +58,7 @@ impl PartSolve for Solution {
 		)
 	}
 
-	fn part_two(&self, pairs: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_two(&self, pairs: &dyn core::any::Any) -> Option<String> {
 		let (list, occurrences) = pairs.downcast_ref::<Vec<(i32, i32)>>().map(|pairs| {
 			let mut left = Vec::with_capacity(pairs.len());
 			let mut right: BTreeMap<i32, i32> = BTreeMap::new();

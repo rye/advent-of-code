@@ -190,7 +190,7 @@ impl PartSolve for Solution {
 		Ok(Box::new(Grid(grid)))
 	}
 
-	fn part_one(&self, grid: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_one(&self, grid: &dyn core::any::Any) -> Option<String> {
 		let grid = grid.downcast_ref::<Grid>()?;
 
 		let mut trailheads: Vec<(usize, usize)> = Vec::new();
@@ -212,7 +212,7 @@ impl PartSolve for Solution {
 		)
 	}
 
-	fn part_two(&self, grid: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_two(&self, grid: &dyn core::any::Any) -> Option<String> {
 		let grid = grid.downcast_ref::<Grid>()?;
 
 		let mut trailheads: Vec<(usize, usize)> = Vec::new();

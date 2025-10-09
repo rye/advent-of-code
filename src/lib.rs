@@ -40,10 +40,10 @@ pub trait PartSolve {
 	fn parse(&mut self, input: &str) -> anyhow::Result<Box<dyn Any>>;
 
 	/// Solve the first part of the puzzle.
-	fn part_one(&self, intermediate: &Box<dyn Any>) -> Option<String>;
+	fn part_one(&self, intermediate: &dyn Any) -> Option<String>;
 
 	/// Solve the second part of the puzzle.
-	fn part_two(&self, intermediate: &Box<dyn Any>) -> Option<String>;
+	fn part_two(&self, intermediate: &dyn Any) -> Option<String>;
 }
 
 /// Execution constraints controlling which solvers will be selected.
@@ -201,7 +201,7 @@ macro_rules! gen_gather_matching_solvers {
 /// ## No input, no expected output
 ///
 /// ```
-/// use crate::{PartSolve, Solver, export_solver, part_test};
+/// use aoc::{PartSolve, Solver, export_solver, part_test};
 ///
 /// #[derive(Default)]
 /// struct Solution;
@@ -211,11 +211,11 @@ macro_rules! gen_gather_matching_solvers {
 ///         Ok(Box::new(()))
 ///     }
 ///
-///     fn part_one(&self, _intermediate: &Box<dyn core::any::Any>) -> Option<String> {
+///     fn part_one(&self, _intermediate: &dyn core::any::Any) -> Option<String> {
 ///         None
 ///     }
 ///
-///     fn part_two(&self, _intermediate: &Box<dyn core::any::Any>) -> Option<String> {
+///     fn part_two(&self, _intermediate: &dyn core::any::Any) -> Option<String> {
 ///         None
 ///     }
 /// }
@@ -243,7 +243,7 @@ macro_rules! part_test {
 			let mut solver: Solution = $make_solver_expr,
 			let input: &str = include_str!($input_fname),
 			let intermediate: Box<dyn std::any::Any> = solver.parse(input).unwrap(),
-			let part_result = solver.$part_fn_name(&intermediate),
+			let part_result = solver.$part_fn_name(intermediate.as_ref()),
 			assert_eq!(None, part_result)
 		}
 	};
@@ -254,7 +254,7 @@ macro_rules! part_test {
 			let mut solver: Solution = $make_solver_expr,
 			let input: &str = "",
 			let intermediate: Box<dyn std::any::Any> = solver.parse(input).unwrap(),
-			let part_result = solver.$part_fn_name(&intermediate),
+			let part_result = solver.$part_fn_name(intermediate.as_ref()),
 			assert_eq!(None, part_result)
 		}
 	};
@@ -265,7 +265,7 @@ macro_rules! part_test {
 			let mut solver: Solution = $make_solver_expr,
 			let input: &str = include_str!($input_fname),
 			let intermediate: Box<dyn std::any::Any> = solver.parse(input).unwrap(),
-			let part_result = solver.$part_fn_name(&intermediate),
+			let part_result = solver.$part_fn_name(intermediate.as_ref()),
 			assert_eq!(Some($expected_output.to_string()), part_result)
 		}
 	};
@@ -276,7 +276,7 @@ macro_rules! part_test {
 			let mut solver: Solution = $make_solver_expr,
 			let input: &str = include_str!($input_fname),
 			let intermediate: Box<dyn std::any::Any> = solver.parse(input).unwrap(),
-			let part_result = solver.$part_fn_name(&intermediate),
+			let part_result = solver.$part_fn_name(intermediate.as_ref()),
 			assert_eq!(Some(include_str!($expected_output_file).trim().to_string()), part_result)
 		}
 	};

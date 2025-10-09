@@ -96,7 +96,7 @@ impl PartSolve for Solution {
 		Ok(Box::new(map))
 	}
 
-	fn part_one(&self, map: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_one(&self, map: &dyn core::any::Any) -> Option<String> {
 		let map = map.downcast_ref::<Map>()?;
 
 		let mut map: Map = map.to_owned();
@@ -138,7 +138,7 @@ impl PartSolve for Solution {
 		Some(map.antinodes.len().to_string())
 	}
 
-	fn part_two(&self, map: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_two(&self, map: &dyn core::any::Any) -> Option<String> {
 		let map = map.downcast_ref::<Map>()?;
 
 		let mut map: Map = map.to_owned();

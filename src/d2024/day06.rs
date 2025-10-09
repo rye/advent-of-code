@@ -227,7 +227,7 @@ impl PartSolve for Solution {
 		Ok(Box::new(input.parse::<Grid>()?))
 	}
 
-	fn part_one(&self, grid: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_one(&self, grid: &dyn core::any::Any) -> Option<String> {
 		let grid = grid.downcast_ref::<Grid>()?;
 
 		let mut state = SolverState::from(grid);
@@ -239,7 +239,7 @@ impl PartSolve for Solution {
 		Some(state.count_visited().to_string())
 	}
 
-	fn part_two(&self, grid: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_two(&self, grid: &dyn core::any::Any) -> Option<String> {
 		let grid = grid.downcast_ref::<Grid>()?;
 
 		let mut state = SolverState::from(grid);

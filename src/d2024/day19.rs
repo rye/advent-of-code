@@ -8,11 +8,11 @@ impl PartSolve for Solution {
 		Ok(Box::new(()))
 	}
 
-	fn part_one(&self, _intermediate: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_one(&self, _intermediate: &dyn core::any::Any) -> Option<String> {
 		None
 	}
 
-	fn part_two(&self, _intermediate: &Box<dyn core::any::Any>) -> Option<String> {
+	fn part_two(&self, _intermediate: &dyn core::any::Any) -> Option<String> {
 		None
 	}
 }
