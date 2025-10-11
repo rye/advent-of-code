@@ -99,7 +99,7 @@ crate::test_example!(
 	part_one_example,
 	parse,
 	part_one,
-	include_str!("../../inputs/2016/examples/day02.example.in.txt"),
+	include_str!("examples/day02.example.in.txt"),
 	Some("1985".to_string())
 );
 
@@ -153,7 +153,7 @@ crate::test_example!(
 	part_two_example,
 	parse,
 	part_two,
-	include_str!("../../inputs/2016/examples/day02.example.in.txt"),
+	include_str!("examples/day02.example.in.txt"),
 	Some("5DB3".to_string())
 );
 

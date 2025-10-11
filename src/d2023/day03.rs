@@ -139,7 +139,7 @@ crate::test_example!(
 	part_one_example,
 	parse,
 	part_one,
-	include_str!("../../inputs/2023/examples/day03.example.in.txt"),
+	include_str!("examples/day03.example.in.txt"),
 	Some(4361)
 );
 
@@ -165,7 +165,7 @@ crate::test_example!(
 	part_two_example,
 	parse,
 	part_two,
-	include_str!("../../inputs/2023/examples/day03.example.in.txt"),
+	include_str!("examples/day03.example.in.txt"),
 	Some(467_835)
 );
 
