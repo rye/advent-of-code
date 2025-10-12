@@ -3,15 +3,7 @@
 use core::{any::Any, error::Error};
 use std::collections::BTreeSet;
 
-mod d2015;
-mod d2016;
-mod d2017;
-mod d2018;
-mod d2019;
-mod d2020;
-mod d2021;
-mod d2022;
-mod d2023;
+mod archive;
 mod d2024;
 
 mod dtemplate;
@@ -228,15 +220,15 @@ impl RunConstraints {
 pub fn gather_matching_solvers(constraints: &RunConstraints) -> Vec<(u16, u8, Solver)> {
 	let mut solvers: Vec<(u16, u8, Solver)> = Vec::new();
 
-	d2015::gather_matching_solvers(constraints, &mut solvers);
-	d2016::gather_matching_solvers(constraints, &mut solvers);
-	d2017::gather_matching_solvers(constraints, &mut solvers);
-	d2018::gather_matching_solvers(constraints, &mut solvers);
-	d2019::gather_matching_solvers(constraints, &mut solvers);
-	d2020::gather_matching_solvers(constraints, &mut solvers);
-	d2021::gather_matching_solvers(constraints, &mut solvers);
-	d2022::gather_matching_solvers(constraints, &mut solvers);
-	d2023::gather_matching_solvers(constraints, &mut solvers);
+	archive::d2015::gather_matching_solvers(constraints, &mut solvers);
+	archive::d2016::gather_matching_solvers(constraints, &mut solvers);
+	archive::d2017::gather_matching_solvers(constraints, &mut solvers);
+	archive::d2018::gather_matching_solvers(constraints, &mut solvers);
+	archive::d2019::gather_matching_solvers(constraints, &mut solvers);
+	archive::d2020::gather_matching_solvers(constraints, &mut solvers);
+	archive::d2021::gather_matching_solvers(constraints, &mut solvers);
+	archive::d2022::gather_matching_solvers(constraints, &mut solvers);
+	archive::d2023::gather_matching_solvers(constraints, &mut solvers);
 	d2024::gather_matching_solvers(constraints, &mut solvers);
 	// dtemplate::gather_matching_solvers(constraints, &mut v);
 
