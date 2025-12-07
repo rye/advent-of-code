@@ -4,7 +4,10 @@ use core::{any::Any, error::Error};
 use std::collections::BTreeSet;
 
 mod archive;
+#[cfg(feature = "y2024")]
 mod d2024;
+#[cfg(feature = "y2025")]
+mod d2025;
 
 mod dtemplate;
 
@@ -220,16 +223,29 @@ impl RunConstraints {
 pub fn gather_matching_solvers(constraints: &RunConstraints) -> Vec<(u16, u8, Solver)> {
 	let mut solvers: Vec<(u16, u8, Solver)> = Vec::new();
 
+	#[cfg(feature = "y2015")]
 	archive::d2015::gather_matching_solvers(constraints, &mut solvers);
+	#[cfg(feature = "y2016")]
 	archive::d2016::gather_matching_solvers(constraints, &mut solvers);
+	#[cfg(feature = "y2017")]
 	archive::d2017::gather_matching_solvers(constraints, &mut solvers);
+	#[cfg(feature = "y2018")]
 	archive::d2018::gather_matching_solvers(constraints, &mut solvers);
+	#[cfg(feature = "y2019")]
 	archive::d2019::gather_matching_solvers(constraints, &mut solvers);
+	#[cfg(feature = "y2020")]
 	archive::d2020::gather_matching_solvers(constraints, &mut solvers);
+	#[cfg(feature = "y2021")]
 	archive::d2021::gather_matching_solvers(constraints, &mut solvers);
+	#[cfg(feature = "y2022")]
 	archive::d2022::gather_matching_solvers(constraints, &mut solvers);
+	#[cfg(feature = "y2023")]
 	archive::d2023::gather_matching_solvers(constraints, &mut solvers);
+	#[cfg(feature = "y2024")]
 	d2024::gather_matching_solvers(constraints, &mut solvers);
+	#[cfg(feature = "y2025")]
+	d2025::gather_matching_solvers(constraints, &mut solvers);
+
 	// dtemplate::gather_matching_solvers(constraints, &mut v);
 
 	solvers
