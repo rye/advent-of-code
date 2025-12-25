@@ -1,7 +1,5 @@
-use std::{
-	collections::{BTreeSet, HashSet},
-	num::ParseIntError,
-};
+use core::num::ParseIntError;
+use std::collections::{BTreeSet, HashSet};
 
 type Number = u8;
 

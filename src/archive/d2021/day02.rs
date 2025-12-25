@@ -9,7 +9,7 @@ pub enum CommandParseError {
 	#[error("empty line")]
 	EmptyLine,
 	#[error("invalid units")]
-	ParseUnits(#[from] std::num::ParseIntError),
+	ParseUnits(#[from] core::num::ParseIntError),
 	#[error("invalid command")]
 	InvalidCommand,
 }

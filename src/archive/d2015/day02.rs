@@ -1,4 +1,4 @@
-use std::num::ParseIntError;
+use core::num::ParseIntError;
 
 pub type Intermediate = Vec<Gift>;
 pub type Output = usize;

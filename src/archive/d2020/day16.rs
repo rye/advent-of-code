@@ -1,6 +1,7 @@
 use regex::Regex;
+
+use core::ops::RangeInclusive;
 use std::collections::{HashMap, HashSet};
-use std::ops::RangeInclusive;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Rule {

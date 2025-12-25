@@ -1,7 +1,9 @@
-use std::convert::Infallible;
-
 use {
-	core::{ops::RangeInclusive, str::FromStr},
+	core::{
+		convert::Infallible,
+		ops::RangeInclusive,
+		str::FromStr,
+	},
 	std::collections::{BTreeMap, VecDeque},
 };
 

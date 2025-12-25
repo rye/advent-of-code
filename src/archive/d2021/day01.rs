@@ -1,6 +1,6 @@
 pub type Intermediate = Vec<u16>;
 
-pub fn parse(input: &str) -> Result<Intermediate, std::num::ParseIntError> {
+pub fn parse(input: &str) -> Result<Intermediate, core::num::ParseIntError> {
 	input.lines().map(str::parse).collect()
 }
 

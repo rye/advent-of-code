@@ -1,9 +1,6 @@
 use {
-	core::str::FromStr,
-	std::{
-		collections::{BTreeMap, btree_map::Entry},
-		convert::Infallible,
-	},
+	core::{convert::Infallible, str::FromStr},
+	std::collections::{BTreeMap, btree_map::Entry},
 };
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord)]
