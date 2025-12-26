@@ -37,7 +37,7 @@ impl FromStr for Move {
 
 #[cfg(test)]
 mod parse {
-	use std::mem::discriminant;
+	use core::mem::discriminant;
 
 	use super::{Direction, Move};
 

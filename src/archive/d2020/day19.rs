@@ -1,7 +1,8 @@
 #![allow(unused_imports)]
 
+use core::str::FromStr;
+use std::collections::*;
 use std::io::{Read, stdin};
-use std::{collections::*, str::FromStr};
 
 use regex::Regex;
 

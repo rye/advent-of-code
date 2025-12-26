@@ -1,6 +1,7 @@
 mod neighbors;
 
 #[derive(PartialEq)]
+#[allow(dead_code)]
 pub enum SolverMode {
 	PartOne,
 	PartTwo,
@@ -10,7 +11,7 @@ pub enum SolverMode {
 #[macro_export]
 macro_rules! generate_solver {
 	($fn_name:ident, =>, $place:path ) => {
-		pub(crate) fn $fn_name(data: &str) -> Result<(), Box<dyn std::error::Error>> {
+		pub(crate) fn $fn_name(data: &str) -> Result<(), Box<dyn core::error::Error>> {
 			use $place::{Intermediate, parse, part_one, part_two};
 
 			let intermediate: Intermediate = parse(data)?;

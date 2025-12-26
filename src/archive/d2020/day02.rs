@@ -1,4 +1,4 @@
-use std::str::FromStr;
+use core::str::FromStr;
 
 pub struct Rule {
 	count_range: (usize, usize),

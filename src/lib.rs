@@ -1,5 +1,3 @@
-#![allow(clippy::unnecessary_wraps, clippy::trivially_copy_pass_by_ref)]
-
 use core::{any::Any, error::Error};
 use std::collections::BTreeSet;
 
@@ -342,7 +340,7 @@ macro_rules! part_test {
 			$test_fn_name,
 			let mut solver: Solution = $make_solver_expr,
 			let input: &str = "",
-			let intermediate: Box<dyn std::any::Any> = solver.parse(input).unwrap(),
+			let intermediate: Box<dyn core::any::Any> = solver.parse(input).unwrap(),
 			let part_result = solver.$part_fn_name(intermediate.as_ref()),
 			assert_eq!(None, part_result)
 		}
@@ -353,7 +351,7 @@ macro_rules! part_test {
 			$test_fn_name,
 			let mut solver: Solution = $make_solver_expr,
 			let input: &str = include_str!($input_fname),
-			let intermediate: Box<dyn std::any::Any> = solver.parse(input).unwrap(),
+			let intermediate: Box<dyn core::any::Any> = solver.parse(input).unwrap(),
 			let part_result = solver.$part_fn_name(intermediate.as_ref()),
 			assert_eq!(Some($expected_output.to_string()), part_result)
 		}
@@ -364,7 +362,7 @@ macro_rules! part_test {
 			$test_fn_name,
 			let mut solver: Solution = $make_solver_expr,
 			let input: &str = include_str!($input_fname),
-			let intermediate: Box<dyn std::any::Any> = solver.parse(input).unwrap(),
+			let intermediate: Box<dyn core::any::Any> = solver.parse(input).unwrap(),
 			let part_result = solver.$part_fn_name(intermediate.as_ref()),
 			assert_eq!(Some(include_str!($expected_output_file).trim().to_string()), part_result)
 		}

@@ -31,7 +31,7 @@ pub struct Space<const WIDTH: usize, const HEIGHT: usize> {
 }
 
 impl<const WIDTH: usize, const HEIGHT: usize> core::fmt::Display for Space<WIDTH, HEIGHT> {
-	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+	fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
 		for y in 0..HEIGHT {
 			for x in 0..WIDTH {
 				write!(

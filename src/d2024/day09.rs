@@ -1,7 +1,5 @@
-use std::{
-	collections::{BTreeMap, BTreeSet, VecDeque},
-	ops::RangeInclusive,
-};
+use core::ops::RangeInclusive;
+use std::collections::{BTreeMap, BTreeSet, VecDeque};
 
 use crate::{PartSolve, Solver, export_solver, part_test};
 

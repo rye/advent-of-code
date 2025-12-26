@@ -53,7 +53,7 @@ impl<const N: usize> core::str::FromStr for State<N> {
 			.map(|line| {
 				let octopi: [Octopus; N] = line
 					.chars()
-					.map(std::convert::Into::into)
+					.map(core::convert::Into::into)
 					.collect::<Vec<_>>()
 					.try_into()
 					.expect("failed to parse {N} octopi on a line");

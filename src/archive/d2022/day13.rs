@@ -1,5 +1,5 @@
-use core::str::FromStr;
-use std::{cmp::Ordering, collections::VecDeque};
+use core::{cmp::Ordering, str::FromStr};
+use std::collections::VecDeque;
 
 pub type Intermediate = Vec<Pair>;
 pub type Output = usize;
@@ -12,7 +12,7 @@ pub enum PacketData {
 }
 
 impl core::fmt::Display for PacketData {
-	fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+	fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
 		match self {
 			PacketData::Integer(u32) => write!(f, "{u32}"),
 			PacketData::List(children) => write!(

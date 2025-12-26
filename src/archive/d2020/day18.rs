@@ -7,8 +7,8 @@ pub enum Token {
 	Plus,
 }
 
-impl std::fmt::Display for Token {
-	fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+impl core::fmt::Display for Token {
+	fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
 		match self {
 			Token::Number(n) => write!(f, "{n}"),
 			Token::Plus => write!(f, "+"),
@@ -22,8 +22,8 @@ impl std::fmt::Display for Token {
 #[derive(Debug)]
 pub struct Expr(Vec<Token>);
 
-impl std::fmt::Display for Expr {
-	fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+impl core::fmt::Display for Expr {
+	fn fmt(&self, f: &mut core::fmt::Formatter) -> core::fmt::Result {
 		let disp = self
 			.0
 			.iter()

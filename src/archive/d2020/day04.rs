@@ -1,4 +1,5 @@
-use std::{collections::HashMap, hash::BuildHasher};
+use core::hash::BuildHasher;
+use std::collections::HashMap;
 
 pub fn has_required_fields<S: BuildHasher>(passport: &HashMap<&str, &str, S>) -> bool {
 	matches!(
