@@ -117,7 +117,7 @@ impl PartSolve for Solution {
 
 		Some(
 			ranges
-				.into_iter()
+				.iter()
 				.map(|range| range.clone().filter(|id| !id.is_valid_id()).sum::<u64>())
 				.sum::<u64>()
 				.to_string(),
@@ -129,7 +129,7 @@ impl PartSolve for Solution {
 
 		Some(
 			ranges
-				.into_iter()
+				.iter()
 				.map(|range| {
 					range
 						.clone()
