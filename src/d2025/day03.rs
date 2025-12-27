@@ -3,28 +3,82 @@ use crate::{PartSolve, Solver, export_solver, part_test};
 #[derive(Default)]
 struct Solution;
 
-fn find_max_joltage_slow(bank: &[u8]) -> u16 {
-	// The batteries are arranged into banks; each line of digits in your input corresponds to a single bank of batteries. Within each bank, you need to turn on exactly two batteries; the joltage that the bank produces is equal to the number formed by the digits on the batteries you've turned on. For example, if you have a bank like 12345 and you turn on batteries 2 and 4, the bank would produce 24 jolts. (You cannot rearrange batteries.)
+fn find_max_joltage(bank: &[u8], n_batteries: usize) -> u64 {
+	// In Part One, bank is 100 digits long and there are only 2 batteries to select, leading to a total of
+	// 100 choose 2 = 4_950 combinations.
 	//
-	// Iterative process. We look for a joltage of 9, then 8, etc. Once we find it, we look for the highest joltage to the right of it.
-	// This process might require backtracking , e.g. if the bank is 729, the max joltage would be 79.
-	// However, if the bank is 798, the max joltage would be 98.
-	// This means that we need to keep track of the last found joltage and its positions
+	// In Part Two, though, there are 12 batteries to select, a total of 100 choose 12 = 1_050_421_051_106_700
+	// combinations, which is obviously way more than we want to iterate over by brute force. Instead, we can use a
+	// recursive DFS approach with memoization to find the maximum joltage efficiently.
 
-	// Brute force approach:
-	let mut max_joltage = 0u16;
 	let len = bank.len();
+	assert!(
+		n_batteries <= len,
+		"cannot select {n_batteries} batteries from a bank of length {len}"
+	);
 
-	for i in 0..len {
-		for j in (i + 1)..len {
-			let joltage = (bank[i] as u16) * 10 + (bank[j] as u16);
-			if joltage > max_joltage {
-				max_joltage = joltage;
-			}
-		}
+	if n_batteries == 0 {
+		return 0;
 	}
 
-	max_joltage
+	// pow10[k] stores 10^k, letting us assign digits to their positional value when assembling the joltage.
+	let mut pow10 = vec![1_u64; n_batteries + 1];
+	for i in 1..=n_batteries {
+		pow10[i] = pow10[i - 1] * 10;
+	}
+
+	// memo[pos][remaining] caches the best value obtainable from bank[pos..] with `remaining` picks.
+	let mut memo = vec![vec![None; n_batteries + 1]; len + 1];
+	let mut visited = vec![vec![false; n_batteries + 1]; len + 1];
+
+	// Depth-first search with memoization: at each position we may skip or take the current digit.
+	fn dfs(
+		pos: usize,
+		remaining: usize,
+		bank: &[u8],
+		pow10: &[u64],
+		memo: &mut Vec<Vec<Option<u64>>>,
+		visited: &mut Vec<Vec<bool>>,
+	) -> Option<u64> {
+		// All required digits chosen; nothing left to add to the result.
+		if remaining == 0 {
+			return Some(0);
+		}
+
+		// Not enough digits left to fulfill requirements.
+		if bank.len() - pos < remaining {
+			return None;
+		}
+
+		// Return cached result if available.
+		if visited[pos][remaining] {
+			return memo[pos][remaining];
+		}
+
+		visited[pos][remaining] = true;
+
+		// Explore the option of skipping the current digit.
+		let mut best = dfs(pos + 1, remaining, bank, pow10, memo, visited);
+
+		// Explore the option of taking the current digit.
+		if let Some(tail) = dfs(pos + 1, remaining - 1, bank, pow10, memo, visited) {
+			let digit = bank[pos] as u64;
+			// Place the chosen digit at the correct power of ten ahead of the already-built tail.
+			let value = digit * pow10[remaining - 1] + tail;
+
+			best = Some(match best {
+				Some(current) => current.max(value),
+				None => value,
+			});
+		}
+
+		memo[pos][remaining] = best;
+
+		best
+	}
+
+	dfs(0, n_batteries, bank, &pow10, &mut memo, &mut visited)
+		.expect("failed to assemble a valid joltage")
 }
 
 impl PartSolve for Solution {
@@ -71,17 +125,29 @@ impl PartSolve for Solution {
 			.downcast_ref::<Vec<Vec<u8>>>()
 			.expect("Failed to downcast banks");
 
-		let total_max_joltage: u32 = banks.iter().map(|bank| find_max_joltage(bank) as u32).sum();
+		let total_max_joltage: u32 = banks
+			.iter()
+			.map(|bank| find_max_joltage(bank, 2) as u32)
+			.sum();
 
 		Some(total_max_joltage.to_string())
 	}
 
-	fn part_two(&self, _intermediate: &dyn core::any::Any) -> Option<String> {
-		None
+	fn part_two(&self, banks: &dyn core::any::Any) -> Option<String> {
+		let banks = banks
+			.downcast_ref::<Vec<Vec<u8>>>()
+			.expect("Failed to downcast banks");
+
+		let total_max_joltage: u64 = banks
+			.iter()
+			.map(|bank| find_max_joltage(bank, 12) as u64)
+			.sum();
+
+		Some(total_max_joltage.to_string())
 	}
 }
 
 export_solver!(solver, Solver::PartSolve(Box::new(Solution)));
 
 part_test!(part_one, Solution, file "day03.example.in.txt", part_one, literal "357");
-part_test!(part_two, Solution, file "day03.example.in.txt", part_two, None);
+part_test!(part_two, Solution, file "day03.example.in.txt", part_two, literal "3121910778619");
