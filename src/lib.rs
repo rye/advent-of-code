@@ -81,7 +81,7 @@ pub trait PartSolve {
 	/// }
 	/// ```
 	///
-	/// To access the intermediate data, use [`Any::downcast_ref`](core::any::Any::downcast_ref):
+	/// To access the intermediate data, use [`Any::downcast_ref`]((dyn core::any::Any)::downcast_ref):
 	///
 	/// ```
 	/// # use aoc::PartSolve;
