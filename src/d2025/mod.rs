@@ -1,4 +1,4 @@
-crate::gen_gather_matching_solvers!(0,
+crate::gen_gather_matching_solvers!(2025,
 	day01 (1) => day01::solver(),
 	day02 (2) => day02::solver(),
 	day03 (3) => day03::solver(),
