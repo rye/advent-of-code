@@ -4,6 +4,7 @@ use crate::{PartSolve, Solver, export_solver, part_test};
 
 trait ValidationExt {
 	fn is_valid_id(&self) -> bool;
+	fn is_valid_id_general(&self) -> bool;
 }
 
 impl ValidationExt for u64 {
@@ -31,63 +32,61 @@ impl ValidationExt for u64 {
 
 		!invalid
 	}
-}
 
-enum ValidityFilter<I>
-where
-	I: Iterator,
-{
-	None(I),
-	ValidOnly(I),
-	InvalidOnly(I),
-	All(I),
-}
+	fn is_valid_id_general(&self) -> bool {
+		// Start by getting the digits.
+		let digits = self
+			.to_string()
+			.chars()
+			.map(|c| c as u8 - b'0')
+			.collect::<Vec<u8>>();
 
-impl<I> Iterator for ValidityFilter<I>
-where
-	I: Iterator<Item = u64>,
-{
-	type Item = u64;
+		let len = digits.len();
 
-	fn next(&mut self) -> Option<Self::Item> {
-		match self {
-			ValidityFilter::None(iter) => iter.next(),
-			ValidityFilter::ValidOnly(iter) => iter.next(),
-			ValidityFilter::InvalidOnly(iter) => iter.next(),
-			ValidityFilter::All(iter) => iter.next(),
+		// Check chunk sizes from len/2 down to 1.
+		for chunk_size in (1..=len / 2).rev() {
+			// If len is not evenly divisible by chunk_size, skip it.
+			if len % chunk_size != 0 {
+				continue;
+			}
+
+			let num_chunks = len / chunk_size;
+
+			let chunks = (0..num_chunks)
+				.map(|i| digits[i * chunk_size..(i + 1) * chunk_size].to_vec())
+				.collect::<Vec<Vec<u8>>>();
+
+			// Check if all chunks are the same as the first chunk.
+			let first_chunk = &chunks[0];
+			let mut all_same = true;
+			for chunk in &chunks[1..] {
+				if chunk != first_chunk {
+					all_same = false;
+					break;
+				}
+			}
+
+			if all_same {
+				return false;
+			}
 		}
-	}
-}
 
-trait ValidityFilterExt: Iterator {
-	fn only_valid(self) -> ValidityFilter<impl Iterator<Item = u64>>;
-	fn only_invalid(self) -> ValidityFilter<impl Iterator<Item = u64>>;
-}
-
-impl<I> ValidityFilterExt for I
-where
-	I: Iterator<Item = u64>,
-{
-	fn only_valid(self) -> ValidityFilter<impl Iterator<Item = u64>>
-	where
-		Self: Sized,
-	{
-		ValidityFilter::ValidOnly(self.filter(|id| id.is_valid_id()))
-	}
-
-	fn only_invalid(self) -> ValidityFilter<impl Iterator<Item = u64>>
-	where
-		Self: Sized,
-	{
-		ValidityFilter::ValidOnly(self.filter(|id| !id.is_valid_id()))
+		true
 	}
 }
 
 #[test]
 fn range_1122_valid() {
 	let range = 11..=22_u64;
-	let valid_ids = range.clone().only_valid().collect::<Vec<u64>>();
-	let invalid_ids = range.clone().only_invalid().collect::<Vec<u64>>();
+	#[allow(clippy::redundant_closure_for_method_calls)]
+	let valid_ids = range
+		.clone()
+		.filter(|id| id.is_valid_id())
+		.collect::<Vec<u64>>();
+	let invalid_ids = range
+		.clone()
+		.filter(|id| !id.is_valid_id())
+		.collect::<Vec<u64>>();
 	assert_eq!(2, invalid_ids.len());
 	assert_eq!(10, valid_ids.len());
 	assert_eq!(vec![11, 22], invalid_ids);
@@ -119,18 +118,31 @@ impl PartSolve for Solution {
 		Some(
 			ranges
 				.into_iter()
-				.map(|range| range.clone().only_invalid().sum::<u64>())
+				.map(|range| range.clone().filter(|id| !id.is_valid_id()).sum::<u64>())
 				.sum::<u64>()
 				.to_string(),
 		)
 	}
 
-	fn part_two(&self, _intermediate: &dyn core::any::Any) -> Option<String> {
-		None
+	fn part_two(&self, ranges: &dyn core::any::Any) -> Option<String> {
+		let ranges = ranges.downcast_ref::<Vec<RangeInclusive<u64>>>()?;
+
+		Some(
+			ranges
+				.into_iter()
+				.map(|range| {
+					range
+						.clone()
+						.filter(|id| !id.is_valid_id_general())
+						.sum::<u64>()
+				})
+				.sum::<u64>()
+				.to_string(),
+		)
 	}
 }
 
 export_solver!(solver, Solver::PartSolve(Box::new(Solution)));
 
 part_test!(part_one, Solution, file "day02.example.in.txt", part_one, file "day02.example.out-1.txt");
-part_test!(part_two, Solution, file "day02.example.in.txt", part_two, None);
+part_test!(part_two, Solution, file "day02.example.in.txt", part_two, file "day02.example.out-2.txt");
