@@ -4,59 +4,6 @@ use crate::{PartSolve, Solver, export_solver, part_test};
 struct Solution;
 
 fn find_max_joltage(bank: &[u8], n_batteries: usize) -> u64 {
-	// In Part One, bank is 100 digits long and there are only 2 batteries to select, leading to a total of
-	// 100 choose 2 = 4_950 combinations.
-	//
-	// In Part Two, though, there are 12 batteries to select, a total of 100 choose 12 = 1_050_421_051_106_700
-	// combinations, which is obviously way more than we want to iterate over by brute force. Instead, we can use a
-	// recursive DFS approach with memoization to find the maximum joltage efficiently.
-
-	// Depth-first search with memoization: at each position we may skip or take the current digit.
-	fn dfs(
-		pos: usize,
-		remaining: usize,
-		bank: &[u8],
-		pow10: &[u64],
-		memo: &mut Vec<Vec<Option<u64>>>,
-		visited: &mut Vec<Vec<bool>>,
-	) -> Option<u64> {
-		// All required digits chosen; nothing left to add to the result.
-		if remaining == 0 {
-			return Some(0);
-		}
-
-		// Not enough digits left to fulfill requirements.
-		if bank.len() - pos < remaining {
-			return None;
-		}
-
-		// Return cached result if available.
-		if visited[pos][remaining] {
-			return memo[pos][remaining];
-		}
-
-		visited[pos][remaining] = true;
-
-		// Explore the option of skipping the current digit.
-		let mut best = dfs(pos + 1, remaining, bank, pow10, memo, visited);
-
-		// Explore the option of taking the current digit.
-		if let Some(tail) = dfs(pos + 1, remaining - 1, bank, pow10, memo, visited) {
-			let digit = u64::from(bank[pos]);
-			// Place the chosen digit at the correct power of ten ahead of the already-built tail.
-			let value = digit * pow10[remaining - 1] + tail;
-
-			best = Some(match best {
-				Some(current) => current.max(value),
-				None => value,
-			});
-		}
-
-		memo[pos][remaining] = best;
-
-		best
-	}
-
 	let len = bank.len();
 	assert!(
 		n_batteries <= len,
@@ -67,18 +14,39 @@ fn find_max_joltage(bank: &[u8], n_batteries: usize) -> u64 {
 		return 0;
 	}
 
-	// pow10[k] stores 10^k, letting us assign digits to their positional value when assembling the joltage.
+	// pow10[k] stores 10^k to conveniently position digits correctly.
 	let mut pow10 = vec![1_u64; n_batteries + 1];
 	for i in 1..=n_batteries {
 		pow10[i] = pow10[i - 1] * 10;
 	}
 
-	// memo[pos][remaining] caches the best value obtainable from bank[pos..] with `remaining` picks.
-	let mut memo = vec![vec![None; n_batteries + 1]; len + 1];
-	let mut visited = vec![vec![false; n_batteries + 1]; len + 1];
+	// dp[pos][remaining] holds the best value using bank[pos..] with `remaining` picks.
+	let mut dp = vec![vec![None; n_batteries + 1]; len + 1];
+	dp[len][0] = Some(0);
 
-	dfs(0, n_batteries, bank, &pow10, &mut memo, &mut visited)
-		.expect("failed to assemble a valid joltage")
+	for pos in (0..len).rev() {
+		for remaining in 0..=n_batteries {
+			let skip = dp[pos + 1][remaining];
+
+			let take = if remaining > 0 {
+				dp[pos + 1][remaining - 1].map(|tail| {
+					let digit = u64::from(bank[pos]);
+					digit * pow10[remaining - 1] + tail
+				})
+			} else {
+				None
+			};
+
+			dp[pos][remaining] = match (skip, take) {
+				(Some(a), Some(b)) => Some(a.max(b)),
+				(Some(a), None) => Some(a),
+				(None, Some(b)) => Some(b),
+				(None, None) => None,
+			};
+		}
+	}
+
+	dp[0][n_batteries].expect("failed to assemble a valid joltage")
 }
 
 impl PartSolve for Solution {
