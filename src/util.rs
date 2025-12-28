@@ -1,4 +1,4 @@
-mod neighbors;
+pub mod neighbors;
 
 #[derive(PartialEq)]
 #[allow(dead_code)]
