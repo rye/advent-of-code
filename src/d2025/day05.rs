@@ -19,7 +19,7 @@ impl FromStr for IngredientDatabase {
 		let sections: Vec<&str> = s.split("\n\n").collect();
 
 		let range_lines = sections
-			.get(0)
+			.first()
 			.ok_or_else(|| anyhow::anyhow!("Missing ranges section"))?
 			.lines();
 
@@ -36,7 +36,7 @@ impl FromStr for IngredientDatabase {
 			.get(1)
 			.ok_or_else(|| anyhow::anyhow!("Missing ingredients section"))?
 			.lines()
-			.map(|line| line.parse::<u64>())
+			.map(str::parse::<u64>)
 			.collect::<Result<Vec<u64>, _>>()?;
 
 		Ok(IngredientDatabase {
@@ -67,7 +67,7 @@ impl IngredientDatabase {
 
 	fn combine_overlaps(&self) -> Vec<(u64, u64)> {
 		// Copy the BTreeSet into a Vec so we can sort and mutate.
-		let mut ranges = self.ranges.iter().cloned().collect::<Vec<(u64, u64)>>();
+		let mut ranges = self.ranges.iter().copied().collect::<Vec<(u64, u64)>>();
 
 		// Sort by start so we can sweep from start to finish once, merging as we go.
 		ranges.sort_by_key(|&(lo, _)| lo);
@@ -77,12 +77,12 @@ impl IngredientDatabase {
 		for (lo, hi) in ranges {
 			// If there is an existing combined range, see whether the current one
 			// overlaps or touches it (ranges are inclusive, so lo == last_hi + 1 counts).
-			if let Some((_last_lo, last_hi)) = combined.last_mut() {
-				if lo <= *last_hi + 1 {
-					// Extend the existing range if the new one reaches further.
-					*last_hi = (*last_hi).max(hi);
-					continue;
-				}
+			if let Some((_last_lo, last_hi)) = combined.last_mut()
+				&& lo <= *last_hi + 1
+			{
+				// Extend the existing range if the new one reaches further.
+				*last_hi = (*last_hi).max(hi);
+				continue;
 			}
 
 			// Otherwise start a new disjoint range.
