@@ -15,7 +15,7 @@ impl core::str::FromStr for Operation {
 		match s {
 			"+" => Ok(Operation::Add),
 			"*" => Ok(Operation::Mul),
-			_ => Err(anyhow::anyhow!("Unknown operation: {}", s)),
+			_ => Err(anyhow::anyhow!("Unknown operation: {s}")),
 		}
 	}
 }
@@ -36,11 +36,11 @@ impl Homework {
 
 		(0..self.num_rows[0].len())
 			.map(|col_idx| {
-				let mut result = self.num_rows[0][col_idx] as u64;
+				let mut result = u64::from(self.num_rows[0][col_idx]);
 				let operator = &self.operators[col_idx];
 
 				for num_rows in &self.num_rows[1..] {
-					let value = num_rows[col_idx] as u64;
+					let value = u64::from(num_rows[col_idx]);
 					match operator {
 						Operation::Add => result += value,
 						Operation::Mul => result *= value,
@@ -64,14 +64,14 @@ impl PartSolve for Solution {
 			.map(|line| {
 				line
 					.split_whitespace()
-					.map(|num_str| num_str.parse::<u32>())
+					.map(str::parse::<u32>)
 					.collect::<Result<Vec<u32>, _>>()
 			})
 			.collect::<Result<Vec<Vec<u32>>, _>>()?;
 
 		let operators = operator_line
 			.split_whitespace()
-			.map(|op_str| op_str.parse::<Operation>())
+			.map(str::parse::<Operation>)
 			.collect::<Result<Vec<Operation>, _>>()?;
 
 		let homework = Homework {
