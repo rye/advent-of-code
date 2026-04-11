@@ -192,12 +192,7 @@ fn parse_ok() {
 pub fn part_one(tree: &Intermediate) -> Option<Output> {
 	let directory_sizes: BTreeMap<Vec<String>, usize> = convert_tree_to_directory_sizes(tree);
 
-	Some(
-		directory_sizes
-			.iter()
-			.filter_map(|(_dir, sz)| if *sz <= 100_000 { Some(sz) } else { None })
-			.sum(),
-	)
+	Some(directory_sizes.values().filter(|&&sz| sz <= 100_000).sum())
 }
 
 #[must_use]
