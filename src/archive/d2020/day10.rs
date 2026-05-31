@@ -113,7 +113,7 @@ fn jolt_differences(adapters: Vec<u64>) -> Vec<u64> {
 		} else {
 			panic!(
 				"impossible joltage difference: current = {}, adapters = {:?}",
-				&current, &adapters
+				current, adapters
 			);
 		}
 
