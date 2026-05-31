@@ -111,10 +111,7 @@ fn jolt_differences(adapters: Vec<u64>) -> Vec<u64> {
 			result.push(3);
 			current += 3;
 		} else {
-			panic!(
-				"impossible joltage difference: current = {}, adapters = {:?}",
-				current, adapters
-			);
+			panic!("impossible joltage difference: current = {current}, adapters = {adapters:?}");
 		}
 
 		adapters.remove(&current);
