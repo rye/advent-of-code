@@ -13,7 +13,7 @@ impl PartSolve for Solution {
 				.map(|num| num.parse::<i32>().unwrap())
 				.collect::<Vec<i32>>();
 
-			debug_assert!(numbers.len() == 2);
+			debug_assert_eq!(numbers.len(), 2);
 
 			(numbers[0], numbers[1])
 		});
@@ -44,7 +44,7 @@ impl PartSolve for Solution {
 				(left, right)
 			})
 			.inspect(|(left, right)| {
-				debug_assert!(left.len() == right.len());
+				debug_assert_eq!(left.len(), right.len());
 			})?;
 
 		// Compute the sum of differences.

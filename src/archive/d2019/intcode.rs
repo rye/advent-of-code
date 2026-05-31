@@ -144,7 +144,7 @@ impl Intcode {
 		let param_outpos = self.inner[self.head + 3];
 
 		// Ensure no illegal output parameter in immediate mode.
-		assert!(parameter_modes.2 != ParameterMode::Immediate);
+		assert_ne!(parameter_modes.2, ParameterMode::Immediate);
 
 		let a = self.resolve_parameter(param_a, &parameter_modes.0);
 		let b = self.resolve_parameter(param_b, &parameter_modes.1);
@@ -161,7 +161,7 @@ impl Intcode {
 		let param_outpos = self.inner[self.head + 3];
 
 		// Ensure no illegal output parameter in immediate mode.
-		assert!(parameter_modes.2 != ParameterMode::Immediate);
+		assert_ne!(parameter_modes.2, ParameterMode::Immediate);
 
 		let a = self.resolve_parameter(param_a, &parameter_modes.0);
 		let b = self.resolve_parameter(param_b, &parameter_modes.1);
