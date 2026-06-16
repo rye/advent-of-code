@@ -7,7 +7,7 @@ rust-version = "1.88.0"
 
 [dependencies]
 anyhow = "1.0.93"
-itertools = "0.14.0"
+itertools = "0.15.0"
 nu-ansi-term = "0.50.1"
 regex = "1.11.1"
 thiserror = "2.0.3"
