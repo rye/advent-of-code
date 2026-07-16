@@ -1,5 +1,4 @@
 use core::{
-	array::TryFromSliceError,
 	fmt::{self, Debug, Display, Formatter},
 	num::ParseIntError,
 	str::FromStr,
@@ -179,14 +178,9 @@ pub fn part_two(instructions: &Intermediate) -> Option<Output> {
 		}
 	}
 
-	scan_output
-		.chunks_exact(40)
-		.map(|chunk| -> Result<[bool; 40], _> { chunk.try_into() })
-		.collect::<Result<Vec<[bool; 40]>, TryFromSliceError>>()
-		.expect("could not split into 40-slices")
-		.try_into()
-		.ok()
-		.map(render_crt_buffer)
+	let (rows, _remainder) = scan_output.as_chunks::<40>();
+
+	rows.try_into().ok().map(render_crt_buffer)
 		.map(Output::PartTwo)
 }
 

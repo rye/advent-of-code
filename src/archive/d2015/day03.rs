@@ -86,10 +86,8 @@ pub fn part_one(directions: &Intermediate) -> Option<Output> {
 
 #[must_use]
 pub fn part_two(directions: &Intermediate) -> Option<Output> {
-	let chunks: Vec<[Direction; 2]> = directions
-		.chunks_exact(2)
-		.map(|pair| [pair[0], pair[1]])
-		.collect();
+	let (pairs, _remainder) = directions.as_chunks::<2>();
+	let chunks: Vec<[Direction; 2]> = pairs.to_vec();
 
 	let santa_track: Vec<PVec> = chunks
 		.iter()

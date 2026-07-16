@@ -69,7 +69,9 @@ pub fn part_one(rucksacks: &Intermediate) -> Option<Output> {
 pub fn part_two(rucksacks: &Intermediate) -> Option<Output> {
 	let mut sum = 0_u32;
 
-	for sack_group in rucksacks.chunks_exact(3) {
+	let (sack_groups, _remainder) = rucksacks.as_chunks::<3>();
+
+	for sack_group in sack_groups {
 		let common_priorities: HashSet<u32> =
 			sack_group
 				.iter()
