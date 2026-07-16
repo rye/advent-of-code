@@ -66,7 +66,7 @@ jobs:
           --lcov
           --output-path lcov.info
       - name: Upload coverage
-        uses: codecov/codecov-action@v6
+        uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
