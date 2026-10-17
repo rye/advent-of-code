@@ -268,11 +268,7 @@ impl PartSolve for Solution {
 
 				let test_state = SolverState::from(&test_grid);
 
-				if test_state.forms_loop() {
-					return true;
-				}
-
-				false
+				test_state.forms_loop()
 			})
 			.count();
 
