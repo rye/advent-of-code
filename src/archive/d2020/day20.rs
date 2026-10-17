@@ -27,9 +27,9 @@ impl Tile {
 
 	fn get_edges(&self) -> (String, String) {
 		let (mut b1, mut b2) = (String::new(), String::new());
-		for i in 0..10 {
-			b1.push(self.v[i][0]);
-			b2.push(self.v[i][9]);
+		for row in self.v.iter().take(10) {
+			b1.push(row[0]);
+			b2.push(row[9]);
 		}
 		(b1, b2)
 	}
