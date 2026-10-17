@@ -131,7 +131,7 @@ impl Expr {
 			output_queue.push(element);
 		}
 
-		assert!(operator_stack.is_empty());
+		assert_eq!(operator_stack, [] as [&Token; 0]);
 
 		output_queue
 	}
