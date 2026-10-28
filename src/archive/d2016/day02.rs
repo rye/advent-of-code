@@ -105,7 +105,7 @@ crate::test_example!(
 
 static PART_ONE_MAP: phf::Map<[u8; 2], char> = phf_map! {
 	// 0 = Up
-	[0, 1] => '1',
+	[0u8, 1u8] => '1',
 	[0, 2] => '2',
 	[0, 3] => '3',
 	[0, 4] => '1',
@@ -159,7 +159,7 @@ crate::test_example!(
 
 static PART_TWO_MAP: phf::Map<[u8; 2], char> = phf_map! {
 	// 0 = Up
-	[0, 0x1] => '1',
+	[0u8, 0x1u8] => '1',
 	[0, 0x2] => '2',
 	[0, 0x4] => '4',
 	[0, 0x5] => '5',
