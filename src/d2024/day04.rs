@@ -200,6 +200,6 @@ impl PartSolve for Solution {
 
 export_solver!(solver, Solver::PartSolve(Box::new(Solution::default())));
 
-part_test!(part_one, Solution::default(), file "day04.example.in.txt", part_one, literal "18");
+part_test!(part_one, Solution::default(), example "2024/day04.example00.in.txt", part_one, literal "18");
 
-part_test!(part_two, Solution::default(), file "day04.example.in.txt", part_two, literal "9");
+part_test!(part_two, Solution::default(), example "2024/day04.example00.in.txt", part_two, literal "9");

@@ -181,6 +181,18 @@ macro_rules! gen_gather_matching_solvers {
 	};
 }
 
+/// Include a puzzle example file from the `puzzles/` directory at the root of this crate.
+///
+/// The path is relative to `puzzles/`, e.g. `example!("2024/day01.example00.in.txt")`.
+/// Only *example* files (the publicly-shared samples from puzzle descriptions) live in the repository;
+/// personal puzzle inputs are kept out of version control under `inputs/`.
+#[macro_export]
+macro_rules! example {
+	($path:literal) => {
+		include_str!(concat!(env!("CARGO_MANIFEST_DIR"), "/puzzles/", $path))
+	};
+}
+
 /// Generate a test function for a part function of a solver.
 ///
 /// # Examples
@@ -226,17 +238,6 @@ macro_rules! gen_gather_matching_solvers {
 /// ```
 #[macro_export]
 macro_rules! part_test {
-	($test_fn_name:ident, $make_solver_expr:expr, file $input_fname:literal, $part_fn_name:ident, None) => {
-		$crate::part_test! {
-			$test_fn_name,
-			let mut solver: Solution = $make_solver_expr,
-			let input: &str = include_str!($input_fname),
-			let intermediate: Box<dyn core::any::Any> = solver.parse(input).unwrap(),
-			let part_result = solver.$part_fn_name(intermediate.as_ref()),
-			assert_eq!(None, part_result)
-		}
-	};
-
 	($test_fn_name:ident, $make_solver_expr:expr, None, $part_fn_name:ident, None) => {
 		$crate::part_test! {
 			$test_fn_name,
@@ -248,25 +249,36 @@ macro_rules! part_test {
 		}
 	};
 
-	($test_fn_name:ident, $make_solver_expr:expr, file $input_fname:literal, $part_fn_name:ident, literal $expected_output:literal) => {
+	($test_fn_name:ident, $make_solver_expr:expr, example $input_path:literal, $part_fn_name:ident, None) => {
 		$crate::part_test! {
 			$test_fn_name,
 			let mut solver: Solution = $make_solver_expr,
-			let input: &str = include_str!($input_fname),
+			let input: &str = $crate::example!($input_path),
+			let intermediate: Box<dyn core::any::Any> = solver.parse(input).unwrap(),
+			let part_result = solver.$part_fn_name(intermediate.as_ref()),
+			assert_eq!(None, part_result)
+		}
+	};
+
+	($test_fn_name:ident, $make_solver_expr:expr, example $input_path:literal, $part_fn_name:ident, literal $expected_output:literal) => {
+		$crate::part_test! {
+			$test_fn_name,
+			let mut solver: Solution = $make_solver_expr,
+			let input: &str = $crate::example!($input_path),
 			let intermediate: Box<dyn core::any::Any> = solver.parse(input).unwrap(),
 			let part_result = solver.$part_fn_name(intermediate.as_ref()),
 			assert_eq!(Some($expected_output.to_string()), part_result)
 		}
 	};
 
-	($test_fn_name:ident, $make_solver_expr:expr, file $input_fname:literal, $part_fn_name:ident, file $expected_output_file:literal) => {
+	($test_fn_name:ident, $make_solver_expr:expr, example $input_path:literal, $part_fn_name:ident, example $expected_output_path:literal) => {
 		$crate::part_test! {
 			$test_fn_name,
 			let mut solver: Solution = $make_solver_expr,
-			let input: &str = include_str!($input_fname),
+			let input: &str = $crate::example!($input_path),
 			let intermediate: Box<dyn core::any::Any> = solver.parse(input).unwrap(),
 			let part_result = solver.$part_fn_name(intermediate.as_ref()),
-			assert_eq!(Some(include_str!($expected_output_file).trim().to_string()), part_result)
+			assert_eq!(Some($crate::example!($expected_output_path).trim().to_string()), part_result)
 		}
 	};
 

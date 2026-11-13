@@ -133,7 +133,7 @@ mod part_one {
 
 	#[test]
 	fn example() {
-		let input = "A Y\nB X\nC Z";
+		let input = crate::example!("2022/day02.example00.in.txt");
 		assert_eq!(part_one(&parse(input).unwrap()), Some(15));
 	}
 }
@@ -149,7 +149,7 @@ mod part_two {
 
 	#[test]
 	fn example() {
-		let input = "A Y\nB X\nC Z";
+		let input = crate::example!("2022/day02.example00.in.txt");
 		assert_eq!(part_two(&parse(input).unwrap()), Some(12));
 	}
 }

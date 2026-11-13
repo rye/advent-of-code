@@ -93,15 +93,15 @@ impl core::str::FromStr for Move {
 	}
 }
 
-crate::test_example!(part_one_r2_l3, parse, part_one, "R2, L3", Some(5));
+crate::test_example!(part_one_r2_l3, parse, part_one, crate::example!("2016/day01.example00.in.txt").trim_end(), Some(5));
 
-crate::test_example!(part_one_r2_r2_r2, parse, part_one, "R2, R2, R2", Some(2));
+crate::test_example!(part_one_r2_r2_r2, parse, part_one, crate::example!("2016/day01.example01.in.txt").trim_end(), Some(2));
 
 crate::test_example!(
 	part_one_r5_l5_r5_r3,
 	parse,
 	part_one,
-	"R5, L5, R5, R3",
+	crate::example!("2016/day01.example02.in.txt").trim_end(),
 	Some(12)
 );
 
@@ -114,6 +114,6 @@ crate::test_example!(
 	part_two_r8_r4_r4_r8,
 	parse,
 	part_two,
-	"R8, R4, R4, R8",
+	crate::example!("2016/day01.example03.in.txt").trim_end(),
 	Some(4)
 );
