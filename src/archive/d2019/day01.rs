@@ -25,10 +25,10 @@ pub fn part_one(module_weights: &Intermediate) -> Option<Output> {
 
 crate::generate_example_tests!(
 	parse, part_one,
-	fuel_part_one_12 | "12" => Some(2),
-	fuel_part_one_14 | "14" => Some(2),
-	fuel_part_one_1969 | "1969" => Some(654),
-	fuel_part_one_100756 | "100756" => Some(33583),
+	fuel_part_one_12 | crate::example!("2019/day01.example00.in.txt").trim_end() => Some(2),
+	fuel_part_one_14 | crate::example!("2019/day01.example01.in.txt").trim_end() => Some(2),
+	fuel_part_one_1969 | crate::example!("2019/day01.example02.in.txt").trim_end() => Some(654),
+	fuel_part_one_100756 | crate::example!("2019/day01.example03.in.txt").trim_end() => Some(33583),
 );
 
 #[must_use]
@@ -65,9 +65,9 @@ pub fn part_two(module_weights: &Intermediate) -> Option<Output> {
 
 crate::generate_example_tests!(
 	parse, part_two,
-	fuel_part_two_14 | "14" => Some(2),
-	fuel_part_two_1969 | "1969" => Some(966),
-	fuel_part_two_100756 | "100756" => Some(50346)
+	fuel_part_two_14 | crate::example!("2019/day01.example01.in.txt").trim_end() => Some(2),
+	fuel_part_two_1969 | crate::example!("2019/day01.example02.in.txt").trim_end() => Some(966),
+	fuel_part_two_100756 | crate::example!("2019/day01.example03.in.txt").trim_end() => Some(50346)
 );
 
 crate::generate_solver!(solve, =>, self);

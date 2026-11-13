@@ -21,9 +21,9 @@ type Output = i32;
 
 #[cfg(test)]
 fn example_positions() -> impl Iterator<Item = CrabPosition> {
-	[16, 1, 2, 0, 4, 2, 7, 1, 2, 14]
+	parse(crate::example!("2021/day07.example00.in.txt"))
+		.unwrap()
 		.into_iter()
-		.map(CrabPosition)
 }
 
 fn cost_to_align_one_linear(position: CrabPosition, target: CrabPosition) -> i32 {

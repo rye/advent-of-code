@@ -58,7 +58,7 @@ crate::test_example!(
 	part_one_example,
 	parse,
 	part_one,
-	include_str!("examples/day05.example.in.txt"),
+	crate::example!("2017/day05.example00.in.txt"),
 	Some(5)
 );
 
@@ -81,7 +81,7 @@ crate::test_example!(
 	part_two_example,
 	parse,
 	part_two,
-	include_str!("examples/day05.example.in.txt"),
+	crate::example!("2017/day05.example00.in.txt"),
 	Some(10)
 );
 

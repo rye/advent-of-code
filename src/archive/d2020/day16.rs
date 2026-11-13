@@ -92,18 +92,7 @@ mod part_one {
 
 	#[test]
 	fn example() {
-		let input = "class: 1-3 or 5-7
-row: 6-11 or 33-44
-seat: 13-40 or 45-50
-
-your ticket:
-7,1,14
-
-nearby tickets:
-7,3,47
-40,4,50
-55,2,20
-38,6,12";
+		let input = crate::example!("2020/day16.example00.in.txt");
 
 		let intermediate = parse(input).unwrap();
 
@@ -222,6 +211,8 @@ mod part_two {
 
 	#[test]
 	fn example() {
+		// The second example from the puzzle; it states no answer to part two's
+		// question (there are no "departure" fields), so it isn't an example file.
 		let input = "class: 0-1 or 4-19
 row: 0-5 or 8-19
 seat: 0-13 or 16-19

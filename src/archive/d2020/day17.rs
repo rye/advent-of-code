@@ -28,7 +28,7 @@ mod parse {
 
 	#[test]
 	fn example() {
-		let input = ".#.\n..#\n###";
+		let input = crate::example!("2020/day17.example00.in.txt");
 
 		assert_eq!(
 			parse(input),
@@ -134,7 +134,7 @@ mod part_one {
 
 	#[test]
 	fn example() {
-		let input = ".#.\n..#\n###";
+		let input = crate::example!("2020/day17.example00.in.txt");
 
 		assert_eq!(part_one(&parse(input).unwrap()), Some(112));
 	}
@@ -154,7 +154,7 @@ mod part_two {
 
 	#[test]
 	fn example() {
-		let input = ".#.\n..#\n###";
+		let input = crate::example!("2020/day17.example00.in.txt");
 
 		assert_eq!(part_two(&parse(input).unwrap()), Some(848));
 	}

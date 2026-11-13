@@ -140,11 +140,7 @@ fn basin_size(height_map: &HeightMap, (x, y): (u32, u32)) -> u32 {
 
 #[test]
 fn part_two_examples() {
-	let string = "2199943210
-3987894921
-9856789892
-8767896789
-9899965678";
+	let string = crate::example!("2021/day09.example00.in.txt");
 	let height_map = parse(string).expect("failed to parse");
 
 	assert_eq!(3, basin_size(&height_map, (1, 0)));

@@ -128,7 +128,7 @@ mod instruction_fromstr {
 	#[test]
 	fn turn_on_0_0_through_999_999() {
 		assert_eq!(
-			"turn on 0,0 through 999,999".parse::<Instruction>(),
+			crate::example!("2015/day06.example00.in.txt").trim_end().parse::<Instruction>(),
 			Ok(Instruction {
 				action: Action::TurnOn,
 				start: Coord { x: 0, y: 0 },
@@ -140,7 +140,7 @@ mod instruction_fromstr {
 	#[test]
 	fn toggle_0_0_through_999_0() {
 		assert_eq!(
-			"toggle 0,0 through 999,0".parse::<Instruction>(),
+			crate::example!("2015/day06.example04.in.txt").trim_end().parse::<Instruction>(),
 			Ok(Instruction {
 				action: Action::Toggle,
 				start: Coord { x: 0, y: 0 },
@@ -152,7 +152,7 @@ mod instruction_fromstr {
 	#[test]
 	fn turn_off_499_499_through_500_500() {
 		assert_eq!(
-			"turn off 499,499 through 500,500".parse::<Instruction>(),
+			crate::example!("2015/day06.example03.in.txt").trim_end().parse::<Instruction>(),
 			Ok(Instruction {
 				action: Action::TurnOff,
 				start: Coord { x: 499, y: 499 },

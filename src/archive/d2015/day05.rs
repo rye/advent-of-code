@@ -105,22 +105,22 @@ mod is_nice_new {
 
 	#[test]
 	fn qjhvhtzxzqqjkmpb_is_nice() {
-		assert!(is_nice_new(&"qjhvhtzxzqqjkmpb"));
+		assert!(is_nice_new(&crate::example!("2015/day05.example05.in.txt").trim_end()));
 	}
 
 	#[test]
 	fn xxyxx_is_nice() {
-		assert!(is_nice_new(&"xxyxx"));
+		assert!(is_nice_new(&crate::example!("2015/day05.example06.in.txt").trim_end()));
 	}
 
 	#[test]
 	fn uurcxstgmygtbstg_is_naughty() {
-		assert!(!is_nice_new(&"uurcxstgmygtbstg"));
+		assert!(!is_nice_new(&crate::example!("2015/day05.example07.in.txt").trim_end()));
 	}
 
 	#[test]
 	fn ieodomkazucvgmuy_is_nice() {
-		assert!(!is_nice_new(&"ieodomkazucvgmuy"));
+		assert!(!is_nice_new(&crate::example!("2015/day05.example08.in.txt").trim_end()));
 	}
 }
 

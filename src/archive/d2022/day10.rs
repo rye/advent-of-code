@@ -136,7 +136,7 @@ crate::test_example!(
 	part_one_example,
 	parse,
 	part_one,
-	include_str!("examples/day10-longer.example.in.txt"),
+	crate::example!("2022/day10.example00.in.txt"),
 	Some(Output::PartOne(13140))
 );
 
@@ -186,12 +186,12 @@ pub fn part_two(instructions: &Intermediate) -> Option<Output> {
 
 #[test]
 fn part_two_example() {
-	let input = include_str!("examples/day10-longer.example.in.txt");
+	let input = crate::example!("2022/day10.example00.in.txt");
 
 	assert_eq!(
 		part_two(&parse(input).expect("failed to parse")),
 		Some(Output::PartTwo(
-			include_str!("examples/day10-longer-image.example.in.txt").to_string()
+			crate::example!("2022/day10.example00.out-2.txt").to_string()
 		))
 	);
 }

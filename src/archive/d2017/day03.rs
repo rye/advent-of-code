@@ -23,10 +23,10 @@ pub fn part_two(input: &Intermediate) -> Option<Output> {
 	grid_values().find(|n| n > input)
 }
 
-crate::test_example!(part_one_1, parse, part_one, "1", Some(0));
-crate::test_example!(part_one_12, parse, part_one, "12", Some(3));
-crate::test_example!(part_one_23, parse, part_one, "23", Some(2));
-crate::test_example!(part_one_1024, parse, part_one, "1024", Some(31));
+crate::test_example!(part_one_1, parse, part_one, crate::example!("2017/day03.example00.in.txt").trim_end(), Some(0));
+crate::test_example!(part_one_12, parse, part_one, crate::example!("2017/day03.example01.in.txt").trim_end(), Some(3));
+crate::test_example!(part_one_23, parse, part_one, crate::example!("2017/day03.example02.in.txt").trim_end(), Some(2));
+crate::test_example!(part_one_1024, parse, part_one, crate::example!("2017/day03.example03.in.txt").trim_end(), Some(31));
 
 struct GridIter {
 	set: BTreeSet<(i32, i32)>,

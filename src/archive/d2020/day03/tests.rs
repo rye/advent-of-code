@@ -6,7 +6,7 @@ mod slope {
 
 	#[cfg(test)]
 	fn test_slope() -> Vec<Vec<char>> {
-		let data = include_str!("test-data");
+		let data = crate::example!("2020/day03.example00.in.txt");
 		let data: Vec<Vec<char>> = data
 			.split('\n')
 			.filter(|s| !s.is_empty())

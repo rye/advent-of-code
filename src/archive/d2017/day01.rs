@@ -41,15 +41,15 @@ pub fn part_two(chars: &Intermediate) -> Option<Output> {
 	Some(sum as usize)
 }
 
-crate::test_example!(part_one_1122, parse, part_one, "1122", Some(3));
-crate::test_example!(part_one_1111, parse, part_one, "1111", Some(4));
-crate::test_example!(part_one_1234, parse, part_one, "1234", Some(0));
-crate::test_example!(part_one_91212129, parse, part_one, "91212129", Some(9));
+crate::test_example!(part_one_1122, parse, part_one, crate::example!("2017/day01.example00.in.txt").trim_end(), Some(3));
+crate::test_example!(part_one_1111, parse, part_one, crate::example!("2017/day01.example01.in.txt").trim_end(), Some(4));
+crate::test_example!(part_one_1234, parse, part_one, crate::example!("2017/day01.example02.in.txt").trim_end(), Some(0));
+crate::test_example!(part_one_91212129, parse, part_one, crate::example!("2017/day01.example03.in.txt").trim_end(), Some(9));
 
-crate::test_example!(part_two_1212, parse, part_two, "1212", Some(6));
-crate::test_example!(part_two_1221, parse, part_two, "1221", Some(0));
-crate::test_example!(part_two_123425, parse, part_two, "123425", Some(4));
-crate::test_example!(part_two_123123, parse, part_two, "123123", Some(12));
-crate::test_example!(part_two_12131415, parse, part_two, "12131415", Some(4));
+crate::test_example!(part_two_1212, parse, part_two, crate::example!("2017/day01.example04.in.txt").trim_end(), Some(6));
+crate::test_example!(part_two_1221, parse, part_two, crate::example!("2017/day01.example05.in.txt").trim_end(), Some(0));
+crate::test_example!(part_two_123425, parse, part_two, crate::example!("2017/day01.example06.in.txt").trim_end(), Some(4));
+crate::test_example!(part_two_123123, parse, part_two, crate::example!("2017/day01.example07.in.txt").trim_end(), Some(12));
+crate::test_example!(part_two_12131415, parse, part_two, crate::example!("2017/day01.example08.in.txt").trim_end(), Some(4));
 
 crate::generate_solver!(solve, =>, self);

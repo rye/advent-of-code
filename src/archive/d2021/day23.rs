@@ -168,11 +168,7 @@ pub fn parse(input: &str) -> Result<Intermediate, core::convert::Infallible> {
 
 #[test]
 fn parse_example() {
-	let example = "#############
-#...........#
-###B#C#B#D###
-  #A#D#C#A#
-  #########";
+	let example = crate::example!("2021/day23.example00.in.txt");
 
 	assert_eq!(
 		parse(example),
@@ -195,6 +191,7 @@ fn parse_example() {
 
 #[test]
 fn parse_example_1() {
+	// An intermediate state from the puzzle walkthrough, not an example input.
 	let example = "#############
 #.........A.#
 ###.#B#C#D###
