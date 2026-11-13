@@ -7,19 +7,29 @@ You're invited to give it a try!
 
 ## Usage
 
-In general, the way to run a specific day's binary is:
+All years are part of a single crate.
+Pass a year, a day, or both to choose which solvers to run:
 
 ```console
-$ cd [year]
-$ cat inputs/dayXX | cargo run --bin dayXX
+$ cargo run --release -- 2024 7     # 2024, day 7
+$ cargo run --release -- 2024       # every solved day of 2024
+$ cargo run --release -- 7          # day 7 of every year
 ```
 
-or, for days with just a flat solution script,
+Solvers read **your own** puzzle inputs from `inputs/YYYY/dayNN.txt` (or `inputs/archive/YYYY/dayNN.txt`), relative to the repository root.
+That directory is gitignored. Advent of Code asks that inputs not be redistributed, so download your own from [adventofcode.com][aoc].
+
+To run the tests, which use the public puzzle examples checked in under [`puzzles/`](puzzles/README.md):
 
 ```console
-$ cd [year]
-$ cat inputs/dayXX | ./dayXX
+$ cargo test
 ```
+
+## Puzzle inputs, examples, and descriptions
+
+This repository includes only the small **example** inputs and answers from the puzzle descriptions, under `puzzles/YYYY/`.
+The puzzle text itself and my personal inputs stay local and are gitignored.
+See [`puzzles/README.md`](puzzles/README.md) for the layout and conventions.
 
 ## Spoilers Ahead!
 
