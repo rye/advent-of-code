@@ -312,13 +312,13 @@ fn run_one_solver(data: &str, solver: Solver) -> Result<(), Box<dyn Error>> {
 			let mut t_solved_2: Option<Instant> = None;
 
 			let t_solving_1 = Instant::now();
-			if let Some(result) = part_solver.part_one(intermediate.as_ref()) {
+			if let Some(result) = util::run_part("One", || part_solver.part_one(intermediate.as_ref())) {
 				t_solved_1 = Some(Instant::now());
 				println!("Part One: {result}");
 			}
 
 			let t_solving_2 = Instant::now();
-			if let Some(result) = part_solver.part_two(intermediate.as_ref()) {
+			if let Some(result) = util::run_part("Two", || part_solver.part_two(intermediate.as_ref())) {
 				t_solved_2 = Some(Instant::now());
 				println!("Part Two: {result}");
 			}

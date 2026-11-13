@@ -7,6 +7,16 @@ pub enum SolverMode {
 	PartTwo,
 }
 
+/// Run one part of a solver, catching a panic so the other part can still run.
+///
+/// Returns `None` (after reporting on stderr) if the part panicked.
+pub fn run_part<T>(name: &str, part: impl FnOnce() -> Option<T>) -> Option<T> {
+	std::panic::catch_unwind(core::panic::AssertUnwindSafe(part)).unwrap_or_else(|_| {
+		eprintln!("Part {name}: panicked");
+		None
+	})
+}
+
 /// Generate the solver for a given day.
 #[macro_export]
 macro_rules! generate_solver {
@@ -16,11 +26,13 @@ macro_rules! generate_solver {
 
 			let intermediate: Intermediate = parse(data)?;
 
-			if let Some(part_one) = part_one(&intermediate) {
+			// Run each part in isolation so that a panic in one (e.g. part one on a
+			// part-two-only example) doesn't prevent the other from running.
+			if let Some(part_one) = $crate::util::run_part("One", || part_one(&intermediate)) {
 				println!("Part One: {}", part_one);
 			}
 
-			if let Some(part_two) = part_two(&intermediate) {
+			if let Some(part_two) = $crate::util::run_part("Two", || part_two(&intermediate)) {
 				println!("Part Two: {}", part_two);
 			}
 
