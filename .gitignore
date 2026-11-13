@@ -1,1 +1,15 @@
-target/
+/target/
+
+# Personal puzzle inputs: Advent of Code asks that these not be redistributed.
+/inputs/
+
+# Local copies of puzzle descriptions (used for prompting); not redistributable.
+/puzzles/*/day*.md
+/puzzles/*/day*.html
+
+# Local tooling not (yet) committed.
+/puzzles/archive_puzzles.py
+__pycache__/
+
+# Local example-verification tools (not yet committed).
+/tools/
